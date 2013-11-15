@@ -112,3 +112,33 @@ td {
     background-color: rgba(255, 208, 96, 0.21);
     text-align: center;
 }
+
+.bar {
+	fill: yellow;
+	stroke: none;
+}
+
+/*bar graph lable*/
+.bar_text {
+	fill: #fff;
+	font-size:10px;
+}
+
+/*lable*/
+.label
+{
+	fill: #000;
+	font-size: 14px;
+}
+
+/*bubble chart */
+.bubble {
+	fill: #F98;
+	stroke: none;
+}
+
+/*bar graph lable*/
+.bubble_text {
+	fill: #000;
+	font-size:18px;
+}
