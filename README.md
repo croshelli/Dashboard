@@ -1,4 +1,4 @@
 Dashboard
 =========
 
-LMC 3710 atlanta civic dashboard
+LMC 3710 final group project. This is the Atlanta Civic Dashboard for kids.
