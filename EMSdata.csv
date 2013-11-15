@@ -1,0 +1,8 @@
+Target,Result,vs. Target,vs. Prior,Year,Month,Day,MonthName
+80,97,17,1,2013,0,1,January
+80,50,16,-1,2013,1,1,February
+80,97,17,1,2013,2,1,March
+80,96,16,-1,2013,3,1,April
+80,75,15,-1,2013,4,1,May
+80,95,15,0,2013,5,1,June
+80,94,14,-1,2013,6,1,July
