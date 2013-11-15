@@ -156,18 +156,18 @@ function generateGraph(dataset) {
 						.attr("y", 4);
 		
 			
-		};
+};
 
 /*Generate Circle Graphs*/
 
-function Circlegraph(){
+function generatePieCharts(){
 	var w = 490,                        //width
     h = 490,                            //height
     r = 150,                            //radius
     color = d3.scale.category10();     //builtin range of colors
  
     
-	data = [{"label":"76", "value":76,"kl":"June"}, 
+	var data = [{"label":"76", "value":76,"kl":"June"}, 
             {"label":"", "value":24, "label": ""} 
             //{"label":"three", "value":30}];
 			];
@@ -214,9 +214,9 @@ function Circlegraph(){
       .text(function(d) { return data[0].kl; });	
 	 
 	  
-</script>
 
-<script type = "text/javascript">
+
+
 
  var w = 490,                        //width
     h = 490,                            //height
@@ -224,7 +224,7 @@ function Circlegraph(){
     color = d3.scale.category10();     //builtin range of colors
  
     
-	data = [{"label":"78", "value":78,"kl":"July"}, 
+	var data = [{"label":"78", "value":78,"kl":"July"}, 
             {"label":"", "value":22, "label": ""} 
             //{"label":"three", "value":30}];
 			];
@@ -297,4 +297,5 @@ function start(){
 
         }
     });
+    generatePieCharts();
 }
