@@ -160,55 +160,57 @@ function generateGraph(dataset) {
 
 /*Generate Circle Graphs*/
 
-function generatePieCharts(){
+function generatePieCharts(data){
 	var w = 490,                        //width
     h = 490,                            //height
     r = 150,                            //radius
+	p = Math.PI*2;						//perimeter
     color = d3.scale.category10();     //builtin range of colors
  
+	
     
-	var data = [{"label":"76", "value":76,"kl":"June"}, 
-            {"label":"", "value":24, "label": ""} 
-            //{"label":"three", "value":30}];
-			];
-    
-    var vis = d3.select("body")
-        .append("svg:svg")              //create the SVG element inside the <body>
-        .data([data])                   //associate our data with the document
-            .attr("width", w)           //set the width and height of our visualization (these will be attributes of the <svg> tag
-            .attr("height", h)
-        .append("svg:g")                //make a group to hold our pie chart
-            .attr("transform", "translate(" + r + "," + r + ")")    //move the center of the pie chart from 0, 0 to radius, radius
- 
-    var arc = d3.svg.arc()              //this will create <path> elements for us using arc data
-        .outerRadius(r-10)
-		.innerRadius(r-50);
-		
- 
-    var pie = d3.layout.pie()           //this will create arc data for us given a list of values
-        .value(function(d) { return d.value; });    //we must tell it out to access the value of each element in our data array
- 
-    var arcs = vis.selectAll("g.slice")     //this selects all <g> elements with class slice (there aren't any yet)
-        .data(pie)                          //associate the generated pie data (an array of arcs, each having startAngle, endAngle and value properties) 
-        .enter()                            //this will create <g> elements for every "extra" data element that should be associated with a selection. The result is creating a <g> for every object in the data array
-            .append("svg:g")                //create a group to hold each slice (we will have a <path> and a <text> element associated with each slice)
-                .attr("class", "slice");    //allow us to style things in the slices (like text)
- 
-        arcs.append("svg:path")
+	var canvas = d3.select("body").append("svg") //create svg element
+					.attr("x", padding)
+					.attr("y", padding)
+					.attr("width", w)
+					.attr("height", h);
+	
+	var group = canvas.append("g")    		//make a group to hold our pie chart
+					.attr("transform", "translate(" + r+ ", " + r + ")");  //translate it's center to radius
+	
+	var arc = d3.svg.arc()       //create arcs/ set width
+				.outerRadius(r-10)
+				.innerRadius(r-50)
+				;
+	
+	var pie = d3.layout.pie()  				//make pie layout
+				.value(function(d) {return d.value; })
+				
+	var arcs = group.selectAll(".arc")		//put arcs into pie layout by creating them according to amt of data
+					.data(pie(data))
+					.enter()
+					.append("g")
+					.attr("class", "arc");
+	
+	arcs.append("path")
+			.attr("d", arc);
+	
+	 arcs.append("path")
                 .attr("fill", function(d, i) { return color(i); } ) //set the color for each slice to be chosen from the color function defined above
                 .attr("d", arc);                                    //this creates the actual SVG path using the associated data (pie) with the arc drawing function
  
-        arcs.append("svg:text")                                     //add a label to each slice
-                .attr("transform", function(d) {                    //set the label's origin to the center of the arc
-                //we have to make sure to set these before calling arc.centroid
-                d.innerRadius = 0;
-                d.outerRadius = r;
-                return "translate(" + arc.centroid(d) + ")";        //this gives us a pair of coordinates like [50, 50]
-            })
-            .attr("text-anchor", "middle")                          //center the text on it's origin
-            .text(function(d, i) { return data[i].label; });
+      
+	arcs.append("text")                                     //add a label to each slice
+			.attr("transform", function(d) {                    //set the label's origin to the center of the arc
+			//we have to make sure to set these before calling arc.centroid
+			d.innerRadius = 0;
+			d.outerRadius = r;
+			return "translate(" + arc.centroid(d) + ")";        //this gives us a pair of coordinates like [50, 50]
+		})
+		.attr("text-anchor", "middle")                          //center the text on it's origin
+		.text(function(d, i) { return data[i].label; });
 			
-        arcs.append("text")
+    arcs.append("text")
       .attr("dy", ".35em")
       .style("text-anchor", "middle")
       .text(function(d) { return data[0].kl; });	
@@ -218,57 +220,7 @@ function generatePieCharts(){
 
 
 
- var w = 490,                        //width
-    h = 490,                            //height
-    r = 150,                            //radius
-    color = d3.scale.category10();     //builtin range of colors
  
-    
-	var data = [{"label":"78", "value":78,"kl":"July"}, 
-            {"label":"", "value":22, "label": ""} 
-            //{"label":"three", "value":30}];
-			];
-    
-    var vis = d3.select("body")
-        .append("svg:svg")             
-        .data([data])                   
-            .attr("width", w)           
-            .attr("height", h)
-        .append("svg:g")                
-            .attr("transform", "translate(" + r + "," + r + ")")    //move the center of the pie chart from 0, 0 to radius, radius
- 
-    var arc = d3.svg.arc()              //this will create <path> elements for us using arc data
-        .outerRadius(r-10)
-		.innerRadius(r-50);
-		
- 
-    var pie = d3.layout.pie()           //this will create arc data for us given a list of values
-        .value(function(d) { return d.value; });    //we must tell it out to access the value of each element in our data array
- 
-    var arcs = vis.selectAll("g.slice")     //this selects all <g> elements with class slice (there aren't any yet)
-        .data(pie)                          //associate the generated pie data (an array of arcs, each having startAngle, endAngle and value properties) 
-        .enter()                            //this will create <g> elements for every "extra" data element that should be associated with a selection. The result is creating a <g> for every object in the data array
-            .append("svg:g")                //create a group to hold each slice (we will have a <path> and a <text> element associated with each slice)
-                .attr("class", "slice");    //allow us to style things in the slices (like text)
- 
-        arcs.append("svg:path")
-                .attr("fill", function(d, i) { return color(i); } ) //set the color for each slice to be chosen from the color function defined above
-                .attr("d", arc);                                    //this creates the actual SVG path using the associated data (pie) with the arc drawing function
- 
-        arcs.append("svg:text")                                     //add a label to each slice
-                .attr("transform", function(d) {                    //set the label's origin to the center of the arc
-                //we have to make sure to set these before calling arc.centroid
-                d.innerRadius = 0;
-                d.outerRadius = r;
-                return "translate(" + arc.centroid(d) + ")";        //this gives us a pair of coordinates like [50, 50]
-            })
-            .attr("text-anchor", "middle")                          //center the text on it's origin
-            .text(function(d, i) { return data[i].label; });
-			
-        arcs.append("text")
-      .attr("dy", ".35em")
-      .style("text-anchor", "middle")
-      .text(function(d) { return data[0].kl; });	
 }
 
 /*
@@ -296,6 +248,27 @@ function start(){
             generateGraph(EMSdata2);
 
         }
-    });
-    generatePieCharts();
+    })
+	d3.csv("EMSdata3.csv", function(error, data) {
+        if (error) {
+            console.log(error);
+        }
+        else{
+            console.log(data);  
+            EMSdata3 = data;
+			var data = [{"label":"76", "value":76,"kl":"June"}, 
+            {"label":"", "value":24, "label": ""} 
+            //{"label":"three", "value":30}];
+                        ];
+            generatePieCharts(data);
+			var data1 = [{"label":"78", "value":78,"kl":"July"}, 
+            {"label":"", "value":22, "label": ""} 
+            //{"label":"three", "value":30}];
+                        ];
+			generatePieCharts(data1);
+			
+
+        }
+    })
+    
 }
