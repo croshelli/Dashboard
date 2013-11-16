@@ -256,16 +256,29 @@ function start(){
         else{
             console.log(data);  
             EMSdata3 = data;
-			var data = [{"label":"76", "value":76,"kl":"June"}, 
+			
+			var data1 = [{"label":"91", "value":91,"kl":"April"}, 
+            {"label":"", "value":9, "label": ""} 
+            //{"label":"three", "value":30}];
+                        ];
+            generatePieCharts(data1);
+			var data2 = [{"label":"75", "value":75,"kl":"May"}, 
+            {"label":"", "value":25, "label": ""} 
+            //{"label":"three", "value":30}];
+                        ];
+			generatePieCharts(data2);
+			var data3 = [{"label":"76", "value":76,"kl":"June"}, 
             {"label":"", "value":24, "label": ""} 
             //{"label":"three", "value":30}];
                         ];
-            generatePieCharts(data);
-			var data1 = [{"label":"78", "value":78,"kl":"July"}, 
+            generatePieCharts(data3);
+			var data4 = [{"label":"78", "value":78,"kl":"July"}, 
             {"label":"", "value":22, "label": ""} 
             //{"label":"three", "value":30}];
                         ];
-			generatePieCharts(data1);
+			generatePieCharts(data4);
+			
+	
 			
 
         }
