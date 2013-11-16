@@ -176,11 +176,11 @@ function generatePieCharts(data){
 					.attr("height", h);
 	
 	var group = canvas.append("g")    		//make a group to hold our pie chart
-					.attr("transform", "translate(" + r+ ", " + r + ")");  //translate it's center to radius
+					.attr("transform", "translate(" + w/2+ ", " + h/2 + ")");  //translate it's center to radius
 	
 	var arc = d3.svg.arc()       //create arcs/ set width
 				.outerRadius(r-10)
-				.innerRadius(r-50)
+				.innerRadius(r-80)
 				;
 	
 	var pie = d3.layout.pie()  				//make pie layout
@@ -196,7 +196,18 @@ function generatePieCharts(data){
 			.attr("d", arc);
 	
 	 arcs.append("path")
-                .attr("fill", function(d, i) { return color(i); } ) //set the color for each slice to be chosen from the color function defined above
+                .attr("fill", function(d, i) { 
+								retVal = "black";
+								if(d.value< 30){
+									retVal= "black";}
+								else if(d.value<70){
+									retVal="green";}
+								else if(d.value<90){
+									retVal="yellow";}
+								else {
+									retVal="red";
+									}
+								return retVal;}) //set the color for each slice to be chosen from the color function defined above
                 .attr("d", arc);                                    //this creates the actual SVG path using the associated data (pie) with the arc drawing function
  
       
@@ -214,8 +225,12 @@ function generatePieCharts(data){
       .attr("dy", ".35em")
       .style("text-anchor", "middle")
       .text(function(d) { return data[0].kl; });	
-	 
-	  
+	
+	canvas.append("text")
+		.attr("x", w/2)
+		.attr("y", h/2-r-padding)
+		.style("text-anchor", "middle")
+		.text(function(d) { return ("Average EMS Response Time in " +data[0].kl +""); });
 
 
 
