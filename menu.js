@@ -26,7 +26,7 @@ function initialize() {
 
 function setLayout() {
  	
-	banner = d3.select("body")
+	banner = d3.select("div#menuBar")
 				.append("svg")
 				.attr("class", "head")
 				.attr("id", "banner")
@@ -34,7 +34,7 @@ function setLayout() {
 				.attr("height", headerHeight)
 				.attr("overflow", "visible");
 				
-	menu = d3.select("body")
+	menu = d3.select("div#menuBar")
 				.append("svg")
 				.attr("class", "head")
 				.attr("id", "svgmenu")
