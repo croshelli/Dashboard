@@ -58,8 +58,7 @@ function setLayout() {
  					.append("svg")
  					.attr("id", "icons")
  					.attr("width", headWidth)
- 					.attr("height", imageCanvasHeight)
- 					.attr("overflow", "visible");	
+ 					.attr("height", imageCanvasHeight);	
 }    
 
 function generateTabs() {
@@ -139,10 +138,12 @@ function displayBanner() {
 			.attr("width", 1100);
 }
 
-function setImages() {
-	displayImage("ambulance", "home_images/ambulance.png", 0, 400, 414, 209);	
-
-	
+function setImages() {	
+	displayImage("firetruck", "home_images/firetruck.png", 600, 400, 596, 286);
+	displayImage("recycle", "home_images/recycle.png", 95, 270, 70, 63);
+	displayImage("badge", "home_images/badge.png", 860, 270, 47, 56);
+	displayImage("tree", "home_images/tree.png", 350, 240, 113, 145);
+	displayImage("ambulance", "home_images/ambulance.png", 0, 400, 414, 209);
 		
 }    
 
