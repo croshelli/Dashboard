@@ -19,6 +19,7 @@ function initialize() {
             console.log(data);  
             tabsData = data;
             setLayout();
+            displayBanner();
             generateTabs();
 
         }
@@ -104,6 +105,12 @@ function generateTabs() {
 }
 
 function displayBanner() {
-
+	
+	banner.append("image")
+			.attr("xlink:href", "banner.png")
+			.attr("x", 0)
+			.attr("y", 0)
+			.attr("height", 100)
+			.attr("width", 1100);
 }
 
