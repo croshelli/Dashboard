@@ -16,7 +16,8 @@ start();
 function generateGraph(dataset) {
     
 	currChart++;
-   var canvas = d3.select("body").append("svg")
+   var canvas = d3.select("div#graphs").append("svg")
+							.attr("class", "graphs")
 							.attr("x", padding)
 							.attr("y", padding)
 							.attr("width", width)
@@ -183,7 +184,8 @@ function generatePieCharts(data){
  
 	
     
-	var canvas = d3.select("body").append("svg") //create svg element
+	var canvas = d3.select("div#graphs").append("svg")
+					.attr("class", "graphs")      //create svg element
 					.attr("x", padding)
 					.attr("y", padding)
 					.attr("width", w)
