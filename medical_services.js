@@ -1,7 +1,7 @@
 var EMSdata1;
 
 var svg;
-
+var currChart=0;
 var xAxis;
 var yAxis;
 var width = 500;
@@ -15,7 +15,7 @@ start();
 
 function generateGraph(dataset) {
     
-
+	currChart++;
    var canvas = d3.select("body").append("svg")
 							.attr("x", padding)
 							.attr("y", padding)
@@ -155,7 +155,21 @@ function generateGraph(dataset) {
 						.attr("x", rectWidth/2)
 						.attr("y", 4);
 		
-			
+			canvas.append("text")
+		.data(dataset)
+		.attr("x", chartWidth/2 + padding/2 )
+		.attr("y", 0+padding)
+		.style("text-anchor", "middle")
+		.text(function(d) {  
+			var retVal;
+			if(currChart==1){
+				retVal= "% EMS Incidents Meeting SORC - ALS";
+				}
+			else if (currChart ==2){
+				retVal="% EMS Incidents Meeting SORC - BLS";
+				}
+			else{ retVal = "no title"}
+			return retVal; });
 };
 
 /*Generate Circle Graphs*/
@@ -219,7 +233,7 @@ function generatePieCharts(data){
 			return "translate(" + arc.centroid(d) + ")";        //this gives us a pair of coordinates like [50, 50]
 		})
 		.attr("text-anchor", "middle")                          //center the text on it's origin
-		.text(function(d, i) { return data[i].label; });
+		.text(function(d, i) { return data[i].label + " sec"; });
 			
     arcs.append("text")
       .attr("dy", ".35em")

@@ -163,7 +163,7 @@ function generateGraph(dataset) {
 		canvas.append("text")
 		.data(dataset)
 		.attr("x", chartWidth/2 + padding/2 )
-		.attr("y", 0+padding/2)
+		.attr("y", 0+padding-padding/5)
 		.style("text-anchor", "middle")
 		.text(function(d) {  
 			var retVal;
