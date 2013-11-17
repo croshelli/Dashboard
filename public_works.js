@@ -5,7 +5,7 @@
 var EMSdata1;
 
 var svg;
-
+var currChart=0;
 var xAxis;
 var yAxis;
 var width = 500;
@@ -19,7 +19,7 @@ start();
 
 function generateGraph(dataset) {
     
-	var chartName;
+	currChart++;
    var canvas = d3.select("body").append("svg")
 							.attr("x", padding)
 							.attr("y", padding)
@@ -159,14 +159,25 @@ function generateGraph(dataset) {
 						.attr("x", rectWidth/2)
 						.attr("y", 4);
 		
-		/*canvas.append("text")
+		
+		canvas.append("text")
 		.data(dataset)
 		.attr("x", chartWidth/2 + padding/2 )
 		.attr("y", 0+padding/2)
 		.style("text-anchor", "middle")
-		.text(function(d) {return d.Title;});
-		
-		*/
+		.text(function(d) {  
+			var retVal;
+			if(currChart==1){
+				retVal= "% Garbage Pickups Collected On Schedule";
+				}
+			else if (currChart ==2){
+				retVal="% Recycling Pickups Collected On Schedule";
+				}
+			else{ retVal = "no title"}
+			return retVal; });
+
+
+	
 };
 
 
