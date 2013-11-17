@@ -1,6 +1,13 @@
-svg {
-    margin-top: 50px;
-    margin-left: 20px;
+.head {
+	/*border: 2px solid;
+	border-color: #d3d3d3;*/
+	display: block;
+    margin: 0 auto;
+}
+
+body {
+	background-color: #ffffff;
+	margin: 0 auto;
 }
 
 .axis path,
