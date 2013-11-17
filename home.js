@@ -51,6 +51,9 @@ function generateTabs() {
 					return d.url;
 				})
 				.append("g")
+				.attr("class", function(d) {
+					return d.class;
+				})
 				.attr("x", function(d) {
         			return d.x_position;
         		})
@@ -58,7 +61,15 @@ function generateTabs() {
 		        .attr("width", function(d) {
 		        	return d.tab_width;
 		        })
-		        .attr("height", menuHeight);
+		        .attr("height", menuHeight)
+		        .on("mouseover", function(d) {
+        			d3.select(this).select("rect")
+        			.attr("fill", "#5d088a");	
+        		})
+       		 	.on("mouseout", function(d) {
+        			d3.select(this).select("rect")
+        			.attr("fill", "#7709b2");	
+        		});
 	
 	tabs.append("rect")
         .attr("x", function(d) {
@@ -70,6 +81,8 @@ function generateTabs() {
         })
         .attr("height", menuHeight)
         .attr("fill", "#7709b2");
+  
+  
   
 	var xOffset = 20;
 	var yOffset = 6;
@@ -87,10 +100,7 @@ function generateTabs() {
         .attr("font-size", "21px")
         .attr("font-weight", "bold")
         .attr("fill", "white");	
-
-	
-        
- 	      
+           
 }
 
 function displayBanner() {
