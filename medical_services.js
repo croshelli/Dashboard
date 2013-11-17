@@ -226,6 +226,8 @@ function generatePieCharts(data){
       .style("text-anchor", "middle")
       .text(function(d) { return data[0].kl; });	
 	
+	
+	//graph titles
 	canvas.append("text")
 		.attr("x", w/2)
 		.attr("y", h/2-r-padding)
