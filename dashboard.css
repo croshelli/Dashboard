@@ -43,7 +43,7 @@ circle:hover {
 }
 
 div.tooltip {
-	position: relative;
+	position: absolute;
 	text-align: center;
 	width: 160px;
 	height:36px;
