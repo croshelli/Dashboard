@@ -2,8 +2,6 @@ var banner;
 var menu;
 var tabsData;
 
-
-
 var headWidth = 1100;
 var headerHeight = 100;
 var menuHeight = 50;
@@ -67,17 +65,17 @@ function generateTabs() {
 		        .attr("height", menuHeight)
 		        .on("mouseover", function(d) {
         			d3.select(this).select("rect")
-        			.attr("fill", "#5d088a");	
+        				.attr("fill", "#5d088a");	
         		})
         		.on("click", function(d) {
-        			d3.selectAll("rect")
+        			d3.selectAll(".tab")
         				.attr("fill", "#7709b2");
-        			d3.select(this).select("rect")
+        			d3.select(this).select(".tab")
         				.attr("fill", "#5d088a");	
         		})
        		 	.on("mouseout", function(d) {
         			d3.select(this).select("rect")
-        			.attr("fill", "#7709b2");	
+        				.attr("fill", "#7709b2");	
         		});
 	
 	tabs.append("rect")
@@ -115,10 +113,9 @@ function generateTabs() {
 function displayBanner() {
 	
 	banner.append("image")
-			.attr("xlink:href", "banner.png")
+			.attr("xlink:href", "home_images/banner.png")
 			.attr("x", 0)
 			.attr("y", 0)
 			.attr("height", 100)
 			.attr("width", 1100);
 }
-
