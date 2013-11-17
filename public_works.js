@@ -21,6 +21,7 @@ function generateGraph(dataset) {
     
 	currChart++;
    var canvas = d3.select("body").append("svg")
+							.attr("class", "graphs")
 							.attr("x", padding)
 							.attr("y", padding)
 							.attr("width", width)
