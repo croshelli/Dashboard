@@ -139,7 +139,6 @@ function displayBanner() {
 }
 
 function setImages() {	
-<<<<<<< HEAD
 	displayImage("firetruck", "home_images/firetruck.png", 600, 400, 596, 286);
 	displayImage("recycle", "home_images/recycle.png", 95, 270, 70, 63);
 	displayImage("badge", "home_images/badge.png", 860, 270, 47, 56);
@@ -151,7 +150,6 @@ function setImages() {
 function displayImage(id, file, xPos, yPos, imgWidth, imgHeight) {
 	
 	imageCanvas.append("image")
-=======
 	displayImage("plane", "home_images/plane.png", 700, 30, 286, 56, "aviation.html");
 	displayImage("recycle", "home_images/recycle.png", 95, 270, 70, 63, "public_works.html");
 	displayImage("badge", "home_images/badge.png", 860, 270, 47, 56, "police.html");
@@ -166,15 +164,12 @@ function displayImage(id, file, xPos, yPos, imgWidth, imgHeight, link) {
 	imageCanvas.append("a")
 				.attr("xlink:href", link)
 				.append("image")
->>>>>>> 5ed102fd8ece4f6f7bc172c60ba3e9d3d08fb969
 				.attr("id", id)
 				.attr("xlink:href", file)
 				.attr("x", xPos)
 				.attr("y", yPos)
 				.attr("width", imgWidth)
-<<<<<<< HEAD
 				.attr("height", imgHeight);
-=======
 				.attr("height", imgHeight)
 				.on("mouseover", function(d) {
 					var x = -xPos - imgWidth / 2;
@@ -198,7 +193,6 @@ function displayImage(id, file, xPos, yPos, imgWidth, imgHeight, link) {
 						//.attr("transform", "translate(" + x + "," + y + "), scale(1.0, 1.0), translate(" + (- x  - imgWidth  / 2) + "," + (-y  - imgHeight  2)+ ")");
 						.attr("transform", "translate(" + x + "," + y + "), scale(1.0, 1.0), translate(" + -x + "," + -y + ")");
 				});
->>>>>>> 5ed102fd8ece4f6f7bc172c60ba3e9d3d08fb969
 	
 }
 
