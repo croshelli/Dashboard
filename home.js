@@ -139,11 +139,12 @@ function displayBanner() {
 }
 
 function setImages() {	
-	displayImage("firetruck", "home_images/firetruck.png", 600, 400, 596, 286);
+	displayImage("plane", "home_images/plane.png", 700, 30, 286, 56);
 	displayImage("recycle", "home_images/recycle.png", 95, 270, 70, 63);
 	displayImage("badge", "home_images/badge.png", 860, 270, 47, 56);
 	displayImage("tree", "home_images/tree.png", 350, 240, 113, 145);
 	displayImage("ambulance", "home_images/ambulance.png", 0, 400, 414, 209);
+	displayImage("firetruck", "home_images/firetruck.png", 600, 400, 596, 286);
 		
 }    
 
@@ -156,6 +157,21 @@ function displayImage(id, file, xPos, yPos, imgWidth, imgHeight) {
 				.attr("y", yPos)
 				.attr("width", imgWidth)
 				.attr("height", imgHeight);
+				/*.on("mouseover", function(d) {
+					var x = -xPos - imgWidth / 2;
+					var y = -yPos - imgHeight / 2; 
+					d3.select(this)
+						.attr("transform", "translate(" + x + "," + y + "), scale(1.2, 1.2), translate(" + (- x / 1.2 - imgWidth * 1.2 / 2) + "," + (-y / 1.2 - imgHeight * 1.2 / 2)+ ")");
+						//.attr("transform", "translate(" + x + "," + y + "), scale(1.5, 1.5), translate(" + -(x - x / 1.5) + "," + -(y - y / 1.5) + ")");
+				})
+				.on("mouseout", function(d) {
+					d3.select(this)
+					var x = -xPos - imgWidth / 2;
+					var y = -yPos - imgHeight / 2; 
+					d3.select(this)
+						.attr("transform", "translate(" + x + "," + y + "), scale(1.0, 1.0), translate(" + (- x  - imgWidth  / 2) + "," + (-y  - imgHeight  2)+ ")");
+						//.attr("transform", "translate(" + x + "," + y + "), scale(1.5, 1.5), translate(" + -(x - x / 1.5) + "," + -(y - y / 1.5) + ")");
+				});*/
 	
 }
 
