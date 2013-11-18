@@ -170,7 +170,7 @@ function displayImage(id, file, xPos, yPos, imgWidth, imgHeight, link) {
 				.attr("y", yPos)
 				.attr("width", imgWidth)
 				.attr("height", imgHeight);
-				.attr("height", imgHeight)
+				.attr("height", imgHeight);
 				.on("mouseover", function(d) {
 					var x = -xPos - imgWidth / 2;
 					var y = -yPos - imgHeight / 2;
