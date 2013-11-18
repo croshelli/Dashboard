@@ -5,7 +5,7 @@ var currChart=0;
 var xAxis;
 var yAxis;
 var width = 500;
-var height = 250;
+var height = 300;
 var chartX = 30;
 var chartY = 200;
 var chartWidth = (7*60);
@@ -21,7 +21,8 @@ function generateGraph(dataset) {
 							.attr("x", padding)
 							.attr("y", padding)
 							.attr("width", width)
-							.attr("height", height);
+							.attr("height", height)
+							.attr("overflow", "visible");
 							
 						
 				
@@ -177,7 +178,7 @@ function generateGraph(dataset) {
 
 function generatePieCharts(data){
 	var w = 490,                        //width
-    h = 490,                            //height
+    h = 420,                            //height
     r = 150,                            //radius
 	p = Math.PI*2;						//perimeter
     color = d3.scale.category10();     //builtin range of colors
