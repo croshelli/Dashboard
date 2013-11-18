@@ -21,7 +21,8 @@ function generateGraph(dataset) {
 							.attr("x", padding)
 							.attr("y", padding)
 							.attr("width", width)
-							.attr("height", height);
+							.attr("height", height)
+							.attr("overflow", "visible");
 							
 						
 				

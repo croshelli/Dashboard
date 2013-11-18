@@ -15,6 +15,7 @@ var chartY = 200;
 var chartWidth = (7*50);
 var padding = 30;
 var rectWidth = 30;
+
 start();
 
 function generateGraph(dataset) {
@@ -25,7 +26,8 @@ function generateGraph(dataset) {
 							.attr("x", padding)
 							.attr("y", padding)
 							.attr("width", width)
-							.attr("height", height);
+							.attr("height", height)
+							.attr("overflow", "visible");
 							
 						
 				
@@ -35,8 +37,8 @@ function generateGraph(dataset) {
 				.range([ 200,0 ]);
 				
 	var xScale = d3.time.scale()
-				.domain([new Date(2013, 0,1), new Date(2013, 6, 31)])
-				.range([0+padding, chartWidth]);
+				.domain([new Date(2013, 0,1), new Date(2013, 6, 31)]) //changed the start date, so that jan bar wouldn't be flushed agaisnt the y-axis
+				.range([padding, chartWidth]);
 	
 	var xaxis = d3.svg.axis()
 				.scale(xScale)
