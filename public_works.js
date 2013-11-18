@@ -9,7 +9,7 @@ var currChart=0;
 var xAxis;
 var yAxis;
 var width = 500;
-var height = 250;
+var height = 300;
 var chartX = 30;
 var chartY = 200;
 var chartWidth = (7*50);
