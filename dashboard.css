@@ -1,13 +1,56 @@
+body {
+	background-color: #000000;
+	background-image:url('white_bg.png');
+	background-position: center top;
+	background-repeat:no-repeat;
+	background-size:1100px 100%;
+	font-family: "Aria", sans-serif;
+	margin: 0 auto;
+}
+
+nav {
+  position: absolute;
+  left: 0px;
+  width: 200px;
+}
+
+section {
+  /* position is static by default */
+  line-height: 140%;
+  margin: 50px 300px;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 70px;
+  background-color: white;
+  width: 100%;
+}
+
+
+p {
+    font-family: "Verdana", sans-serif;
+    font-size: 26px;
+    font-weight: bold;
+    left: 40%;
+    margin: 0;
+    position: absolute;
+}
+
+#graphs {
+	margin: 20px 300px;
+}
+.container {
+  position: relative;
+}
+
 .head {
 	/*border: 2px solid;
 	border-color: #d3d3d3;*/
 	display: block;
     margin: 0 auto;
-}
-
-body {
-	background-color: #ffffff;
-	margin: 0 auto;
 }
 
 .axis path,
@@ -16,26 +59,6 @@ body {
     stroke: black;
     shape-rendering: crispEdges;
 }
-
-.axis text {
-    font-family: sans-serif;
-    font-size: 11px;
-}
-
-p {
-    font-family: sans-serif;
-    font-size: 26px;
-    font-weight: bold;
-    left: 40%;
-    margin: 0;
-    position: relative;
-}
-
-circle:hover {
-    fill: orange;
-}
-
-
 .dataline {
     fill: none;
     stroke: rgb(19,117,255);
@@ -43,7 +66,7 @@ circle:hover {
 }
 
 div.tooltip {
-	position: relative;
+	position: absolute;
 	text-align: center;
 	width: 160px;
 	height:36px;
@@ -55,97 +78,16 @@ div.tooltip {
 	pointer-events: none;
 }
 
-#buttons {
-    left: 1050px;
-    position: relative;
-}
-
-button{
-    background-color: #222222;
-    border-width: 1px;
-    border-color: #cccccc;
-    color: #ffffff;
-    font-family: Helvetica;
-    font-size: 14px;
-    margin: 0 -3px;
-    padding: 6px 10px;
-    text-rendering: optimizelegibility;
-}
-
-.active {
-    background-color: #e8a804;
-}
-
-button:hover {
-    background-color: #ffaa04;
-}
-
-#left {
-    border-bottom-left-radius: 5px;
-    border-top-left-radius: 5px;
-}
-
-#right {
-    border-bottom-right-radius: 5px;
-    border-top-right-radius: 5px;
-}
-
-
-
-#table_container {
-    margin-left: 250px;
-    margin-top: 0px;
-    width: 300px;
-    height: 75px;
-    position: absolute;
-}
-
-table {
-    border-collapse: collapse;
-}
-
-table, td, th {
-    padding: 2px 4px;
-    border: 1px solid #222222;
-}
-
-th {
-    background-color: #ffd060;
-    font-weight: bold;
-    font-family: Helvetica;
-}
-
-td {
-    background-color: rgba(255, 208, 96, 0.21);
-    text-align: center;
-}
-
-.bar {
-	fill: yellow;
-	stroke: none;
-}
-
-/*bar graph lable*/
-.bar_text {
-	fill: #fff;
-	font-size:10px;
-}
-
-/*lable*/
-.label
+div.sidebar
 {
-	fill: #000;
-	font-size: 14px;
+    position:absolute;
+    fill: rgb(0,0,0);
+    right:0px;
+    bottom:0px;
+    top:0px;
+    width:100px;
 }
 
-/*bubble chart */
-.bubble {
-	fill: #F98;
-	stroke: none;
-}
-
-/*bar graph lable*/
-.bubble_text {
-	fill: #000;
-	font-size:18px;
+circle:hover {
+    fill: orange;
 }
