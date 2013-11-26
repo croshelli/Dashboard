@@ -139,12 +139,12 @@ function displayBanner() {
 }
 
 function setImages() {	
-	displayImage("plane", "home_images/plane.png", 700, 30, 286, 56, "aviation.html");
-	displayImage("recycle", "home_images/recycle.png", 95, 270, 70, 63, "public_works.html");
-	displayImage("badge", "home_images/badge.png", 860, 270, 47, 56, "police.html");
-	displayImage("tree", "home_images/tree.png", 350, 240, 113, 145, "public_works.html");
-	displayImage("ambulance", "home_images/ambulance.png", 0, 400, 414, 209, "medical_services.html");
-	displayImage("firetruck", "home_images/firetruck.png", 600, 400, 596, 286, "fire_rescue.html");
+	displayImage("plane", "home_images/plane.png", 625, 30, 238, 48, "aviation.html");
+	displayImage("recycle", "home_images/recycle.png", 178, 215, 60, 53, "public_works.html");
+	displayImage("badge", "home_images/badge.png", 804, 220, 41, 48, "police.html");
+	displayImage("tree", "home_images/parks.png", 425, 220, 157, 148, "parks.html");
+	displayImage("ambulance", "home_images/ambulance.png", 100, 375, 343, 175, "medical_services.html");
+	displayImage("firetruck", "home_images/firetruck.png", 600, 335, 489, 236, "fire_rescue.html");
 		
 }    
 
@@ -183,6 +183,8 @@ function displayImage(id, file, xPos, yPos, imgWidth, imgHeight, link) {
 				});
 	
 }
+
+
 
 
 
