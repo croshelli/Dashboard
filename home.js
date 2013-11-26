@@ -28,8 +28,8 @@ function initialize() {
             console.log(data);  
             tabsData = data;
             setLayout();
-            displayBanner();
-            generateTabs();
+            //displayBanner();
+            //generateTabs();
             setImages();
 
         }
@@ -38,7 +38,7 @@ function initialize() {
 
 function setLayout() {
  	
-	banner = d3.select("body")
+	/*banner = d3.select("body")
 				.append("svg")
 				.attr("class", "head")
 				.attr("id", "banner")
@@ -52,7 +52,7 @@ function setLayout() {
 				.attr("id", "svgmenu")
 				.attr("width", headWidth)
 				.attr("height", menuHeight)
-				.attr("overflow", "visible");	
+				.attr("overflow", "visible");*/	
 				
 	imageCanvas = d3.select("body")
  					.append("svg")
