@@ -1,3 +1,7 @@
+svg {
+	position: relative;
+}
+
 /* Banner and menu CSS */
 #banner {
 	display: block;
