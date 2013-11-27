@@ -1,3 +1,65 @@
+/* Banner and menu CSS */
+#banner {
+	display: block;
+	height: 100px;
+	position: relative;	
+    text-align: center;
+}
+
+#menu {
+    background-color: #7709b2; 
+    width: 1100px;
+    height: 48px;
+    font-size: 20px; /* 16px; */
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    text-align: center;
+    position: relative;
+    margin: 0 auto;
+}
+
+#menu ul {
+    height: 48px;
+	list-style-type: none;
+    margin: 0px;
+    padding: 12px 0px;
+}
+
+#menu li {  
+	height: 48px;
+	display: inline; 
+	padding: 0px; 
+	
+}
+
+#menu a:hover, a:active {
+    color: #d3d3d3;
+    background-color: #4b0770;
+}
+
+/*
+ * The rollover effect won't be displayed in
+ * Chrome/Safari unless the following block of
+ * code is integrated.
+ */
+#menu ul li:hover a, #menu ul li:active a {
+    color: #d3d3d3;
+    background-color: #4b0770;	
+}
+
+#menu a:link, a:visited {
+	display: inline;
+  	font-weight: bold;
+	color: #ffffff;
+    background-color: #7709b2;
+	padding: 12px 20.19px;
+	text-align: center;
+	text-decoration: none; 
+	text-transform: uppercase;
+}
+
+/* Other CSS */
+
 body {
 	background-color: #000000;
 	background-image:url('white_bg.png');
