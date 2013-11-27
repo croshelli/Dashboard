@@ -4,7 +4,7 @@ var imageCanvasHeight = 750;
 initialize();
 
 function initialize() {
-    d3.csv("tab_data.csv", function(error, data) {
+    d3.csv("csv/tab_data.csv", function(error, data) {
         if (error) {
             console.log(error);
         }

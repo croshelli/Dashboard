@@ -191,7 +191,7 @@ function generateGraph(dataset) {
  * Initializes the visualization.
  */
 function start(){
-    d3.csv("DPWdata1.csv", function(error, data) {
+    d3.csv("csv/DPWdata1.csv", function(error, data) {
         if (error) {
             console.log(error);
         }
@@ -202,7 +202,7 @@ function start(){
 
         }
     })
-	d3.csv("DPWdata2.csv", function(error, data) {
+	d3.csv("csv/DPWdata2.csv", function(error, data) {
         if (error) {
             console.log(error);
         }

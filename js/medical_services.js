@@ -15,7 +15,7 @@ start();
 
 function generateGraph(dataset) {
     
-	currChart++;
+   currChart++;
    var canvas = d3.select("div#graphs").append("svg")
 							.attr("class", "graphs")
 							.attr("x", padding)
@@ -261,7 +261,7 @@ function generatePieCharts(data){
  * Initializes the visualization.
  */
 function start(){
-    d3.csv("EMSdata.csv", function(error, data) {
+    d3.csv("csv/EMSdata.csv", function(error, data) {
         if (error) {
             console.log(error);
         }
@@ -272,7 +272,7 @@ function start(){
 
         }
     })
-	d3.csv("EMSdata2.csv", function(error, data) {
+	d3.csv("csv/EMSdata2.csv", function(error, data) {
         if (error) {
             console.log(error);
         }
@@ -283,7 +283,7 @@ function start(){
 
         }
     })
-	d3.csv("EMSdata3.csv", function(error, data) {
+	d3.csv("csv/EMSdata3.csv", function(error, data) {
         if (error) {
             console.log(error);
         }
