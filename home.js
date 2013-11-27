@@ -1,21 +1,5 @@
-var ambulance;
-var firetruck;
-var recycle;
-var badge;
-var plane;
-var tree;
 var imageCanvasWidth = 1100;
 var imageCanvasHeight = 750;
-var canvas;
-
-
-var banner;
-var menu;
-var tabsData;
-
-var headWidth = 1100;
-var headerHeight = 100;
-var menuHeight = 50;
 
 initialize();
 
@@ -39,7 +23,7 @@ function setLayout() {
 	imageCanvas = d3.select("body")
  					.append("svg")
  					.attr("id", "icons")
- 					.attr("width", headWidth)
+ 					.attr("width", imageCanvasWidth)
  					.attr("height", imageCanvasHeight);	
 }    
 
