@@ -13,13 +13,41 @@ var padding = 30;
 var rectWidth = 30;
 start();
 
+function generateAnimations() {
+	svg = d3.select("div#movingAmbulance")
+	  	.append("svg")
+		.attr("width", 1100)
+		.attr("height", 750);
+	svg.append("image")
+		.attr("xlink:href", "images/road.png")
+		.attr("x", 0)
+		.attr("y", 352)
+		.attr("width", 1100)
+		.attr("height", 98);
+		
+	svg.append("image")
+	    .attr("id", "movingAmbulance")
+	    .attr("xlink:href", "home_images/ambulance.png")
+		.attr("x", 900)
+		.attr("y", 360)
+		.attr("width", 140)
+		.attr("height", 70)
+		.on("mouseover", function(d) {
+			d3.select(this).transition()
+							.attr("x", 20)
+							.duration(1000)
+							.delay(300);
+		});	
+		
+		
+	
+}
+
 function generateGraph(dataset) {
     
    currChart++;
    var canvas = d3.select("div#graphs").append("svg")
 							.attr("class", "graphs")
-							.attr("x", padding)
-							.attr("y", padding)
 							.attr("width", width)
 							.attr("height", height)
 							.attr("overflow", "visible");
@@ -268,6 +296,7 @@ function start(){
         else{
             console.log(data);  
             EMSdata1 = data;
+            generateAnimations();
             generateGraph(EMSdata1);
 
         }

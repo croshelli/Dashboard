@@ -106,7 +106,9 @@ p {
 }
 
 #graphs {
-	margin: 20px 300px;
+	margin: 0px 300px 0px;
+	position: relative;
+	top: 50px;
 }
 .container {
   position: relative;
@@ -156,4 +158,45 @@ div.sidebar
 
 circle:hover {
     fill: orange;
+}
+
+
+
+div.leftBox {
+	position: relative;
+	float: left;	
+	width: 350px;
+	background: #ECFAD7;		
+	border: 3px solid #79C408;
+	border-radius: 15px;	
+	margin:0px 50px 0px 0px;
+	padding: 0px 20px 10px 0px;	
+}
+
+#secondLeft {
+	top: 100px;
+	margin:20px 50px 50px 0px;
+}
+
+div.rightBox {
+	position: relative;
+	float: right;		
+	width: 350px;
+	background: #ECFAD7;		
+	border: 3px solid #79C408;
+	border-radius: 15px;	
+	margin:0px 0px 50px 0;
+	padding: 0px 20px 10px 0px;		
+}
+
+#secondRight {
+	top: 100px;
+	margin:20px 0px 50px 0px;	
+}
+
+#movingAmbulance {
+	margin: auto;
+	position: absolute;
+	top: 150px;
+	right:11.5%;
 }
