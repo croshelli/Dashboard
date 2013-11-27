@@ -69,7 +69,20 @@ function displayImage(id, file, xPos, yPos, imgWidth, imgHeight, link) {
 					d3.select(this)
 						//.attr("transform", "translate(" + x + "," + y + "), scale(1.0, 1.0), translate(" + (- x  - imgWidth  / 2) + "," + (-y  - imgHeight  2)+ ")");
 						.attr("transform", "translate(" + x + "," + y + "), scale(1.0, 1.0), translate(" + -x + "," + -y + ")");
-				});
+				})
+				.attr("transform", function(d) {
+					var x = -xPos - imgWidth / 2;
+					var y = -yPos - imgHeight / 2;
+					return "translate(" + x + "," + y + "), scale(1.5, 1.5), translate(" + -(x - x / 1.5) + "," + -(y - y / 1.5) + ")";					
+				})
+				.transition()
+				.attr("transform", function(d) {
+					var x = -xPos - imgWidth *1.5 / 2;
+					var y = -yPos - imgHeight * 1.5/ 2;
+					return "transform", "translate(" + x + "," + y + "), scale(1.0, 1.0), translate(" + -x + "," + -y + ")";
+				})
+				.duration(1000)
+				.delay(300);
 	
 }
 
