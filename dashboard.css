@@ -111,7 +111,9 @@ p {
 	top: 50px;
 }
 .container {
-  position: relative;
+	position: relative;
+	width: 100%;
+	height: 100%;
 }
 
 .head {
@@ -150,58 +152,55 @@ div.sidebar
 {
     position:absolute;
     fill: rgb(0,0,0);
-    right:0px;
+    right:0%;
     bottom:0px;
     top:0px;
-    width:100px;
+    width:70%;
 }
 
 circle:hover {
     fill: orange;
 }
 
-
-
 div.leftBox {
 	position: relative;
-	float: left;	
-	width: 350px;
+	float: left;
+	width: 45%;
 	background: #ECFAD7;		
 	border: 3px solid #79C408;
 	border-radius: 15px;	
-	margin:0px 50px 0px 0px;
+	margin-left: 0%;
 	padding: 0px 20px 10px 0px;	
 }
 
 #secondLeft {
 	top: 100px;
+	//top: 100%;
 	margin:20px 50px 50px 0px;
 }
 
 div.rightBox {
 	position: relative;
-	float: right;		
-	width: 350px;
+	float: right;	
+	width: 45%;
 	background: #ECFAD7;		
 	border: 3px solid #79C408;
 	border-radius: 15px;	
-	margin:0px 0px 50px 0;
+	margin-right:0%;
 	padding: 0px 20px 10px 0px;		
 }
 
 #secondRight {
+	//top: 100%;
 	top: 100px;
+	//margin-right: 0%;
 	margin:20px 0px 50px 0px;	
 }
 
 #movingAmbulance {
 	margin: auto;
 	position: absolute;
-	top: 150px;
-	right:11.5%;
-}
-
-#firefighter{
-	margin: auto;
-	position: absolute;
+	top: 100px;
+	//right: 11.5px;
+	right:6.4%;
 }
