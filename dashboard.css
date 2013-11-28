@@ -200,3 +200,8 @@ div.rightBox {
 	top: 150px;
 	right:11.5%;
 }
+
+#firefighter{
+	margin: auto;
+	position: absolute;
+}
