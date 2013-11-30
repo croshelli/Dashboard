@@ -213,8 +213,8 @@ function generatePieCharts(data){
     
 	var svg = d3.select("div#graphs").append("svg")
 					.attr("class", "graphs")      //create svg element
-					.attr("width", width)
-					.attr("height", height)
+					.attr("width", width+100)
+					.attr("height", height+200)
 					.attr("overflow", "visible")
 				.append("g")    		//make a group to hold our pie chart
 					.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
@@ -224,18 +224,21 @@ function generatePieCharts(data){
     .sort(null);
 
 	var arc = d3.svg.arc()
-		.innerRadius(radius - 150)
+		.innerRadius(radius - 120)
 		.outerRadius(radius );
 					
 	var titleText = svg.append("text")
 		.attr("x", 0)
-		.attr("y", 0)
+		.attr("y", -10)
+		.style("font-weight", "bold")
 		.style("text-anchor", "middle")
 		.text(  "EMS Response Time" );
 	var timeText=svg.append("text")
 			.attr("x", 0)
-			.attr("y", 15)
+			.attr("y", 25)
+			.attr("font-size","34px")
 			.style("text-anchor", "middle")
+			.style("font-weight", "bold")
 			.text(  "" );
 						
 					
@@ -287,7 +290,7 @@ function generatePieCharts(data){
 										retVal="red";
 										}
 									return retVal;})
-			titleText.transition().duration(100).text(function(d) { return "EMS Response Time " + titles;})
+			titleText.transition().duration(100).text(function(d) { return "EMS Response Time in " + titles+":";})
 			timeText.transition().duration(100).text(function(d) {return (""+id+ " Seconds");});
 			
 		  }
