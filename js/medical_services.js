@@ -89,8 +89,7 @@ function generateGraph(dataset) {
 										.attr("x", function(d, i) { var Year = d["Year"];
 																	var Month =d["Month"];
 																	var Day = d["Day"];
-														console.log( xScale(new Date(Year, Month, Day)));
-														return xScale(new Date( Year, Month, Day ));})
+															return xScale(new Date( Year, Month, Day ));})
 										.attr("y", function(d) {return yScale(d["Result"])+padding;})
 										.attr("fill", function(d,i) { 
 															var color = "red";
@@ -205,82 +204,117 @@ function generateGraph(dataset) {
 /*Generate Circle Graphs*/
 
 function generatePieCharts(data){
-	var w = 490,                        //width
-    h = 420,                            //height
-    r = 150,                            //radius
-	p = Math.PI*2;						//perimeter
-    color = d3.scale.category10();     //builtin range of colors
+	var width = 960,
+    height = 500,
+    radius = Math.min(width, height) / 2;
+   var color = d3.scale.category20();     //builtin range of colors
  
 	
     
-	var canvas = d3.select("div#graphs").append("svg")
+	var svg = d3.select("div#graphs").append("svg")
 					.attr("class", "graphs")      //create svg element
-					.attr("x", padding)
-					.attr("y", padding)
-					.attr("width", w)
-					.attr("height", h);
+					.attr("width", width)
+					.attr("height", height)
+					.attr("overflow", "visible")
+				.append("g")    		//make a group to hold our pie chart
+					.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 	
-	var group = canvas.append("g")    		//make a group to hold our pie chart
-					.attr("transform", "translate(" + w/2+ ", " + h/2 + ")");  //translate it's center to radius
-	
-	var arc = d3.svg.arc()       //create arcs/ set width
-				.outerRadius(r-10)
-				.innerRadius(r-80)
-				;
-	
-	var pie = d3.layout.pie()  				//make pie layout
-				.value(function(d) {return d.value; })
-				
-	var arcs = group.selectAll(".arc")		//put arcs into pie layout by creating them according to amt of data
-					.data(pie(data))
-					.enter()
-					.append("g")
-					.attr("class", "arc");
-	
-	arcs.append("path")
-			.attr("d", arc);
-	
-	 arcs.append("path")
-                .attr("fill", function(d, i) { 
-								retVal = "black";
-								if(d.value< 30){
-									retVal= "black";}
-								else if(d.value<70){
-									retVal="green";}
-								else if(d.value<90){
-									retVal="yellow";}
-								else {
-									retVal="red";
-									}
-								return retVal;}) //set the color for each slice to be chosen from the color function defined above
-                .attr("d", arc);                                    //this creates the actual SVG path using the associated data (pie) with the arc drawing function
- 
-      
-	arcs.append("text")                                     //add a label to each slice
-			.attr("transform", function(d) {                    //set the label's origin to the center of the arc
-			//we have to make sure to set these before calling arc.centroid
-			d.innerRadius = 0;
-			d.outerRadius = r;
-			return "translate(" + arc.centroid(d) + ")";        //this gives us a pair of coordinates like [50, 50]
-		})
-		.attr("text-anchor", "middle")                          //center the text on it's origin
-		.text(function(d, i) { return data[i].label + " sec"; });
-			
-    arcs.append("text")
-      .attr("dy", ".35em")
-      .style("text-anchor", "middle")
-      .text(function(d) { return data[0].kl; });	
-	
-	
-	//graph titles
-	canvas.append("text")
-		.attr("x", w/2)
-		.attr("y", h/2-r-padding)
+	var pie = d3.layout.pie()
+    .value(function(d) { return d.june; })
+    .sort(null);
+
+	var arc = d3.svg.arc()
+		.innerRadius(radius - 150)
+		.outerRadius(radius );
+					
+	var titleText = svg.append("text")
+		.attr("x", 0)
+		.attr("y", 0)
 		.style("text-anchor", "middle")
-		.text(function(d) { return ("Average EMS Response Time in " +data[0].kl +""); });
+		.text(  "EMS Response Time" );
+	var timeText=svg.append("text")
+			.attr("x", 0)
+			.attr("y", 15)
+			.style("text-anchor", "middle")
+			.text(  "" );
+						
+					
+	var path = svg.datum(data).selectAll("path")
+				  .data(pie)
+				  .enter().append("path")
+				  //.attr("fill", function(d, i) { return color(i); })
+				  .attr("fill", function(d, i) { 
+									retVal = "black";
+									if(d.value< 30){
+										retVal= "black";}
+									else if(d.value<70){
+										retVal="green";}
+									else if(d.value<90){
+										retVal="yellow";}
+									else {
+										retVal="red";
+										}
+									return retVal;}) //set the color for each slice to be chosen from the color function defined above
+												 //this creates the actual SVG path using the associated data (pie) with the arc drawing function
+				  .attr("d", arc)
+				  .each(function(d) { this._current = d; }); // store the initial angles
+
+		  d3.selectAll("input")
+			  .on("change", change);
+
+		  var timeout = setTimeout(function() {
+			d3.select("input[value=\"april\"]").property("checked", true).each(change);
+		  }, 2000);
+
+		  function change() {
+			var value = this.value;
+			var id = this.id;
+			var titles = this.title;
+			console.log(id);
+			clearTimeout(timeout);
+			pie.value(function(d) { return d[value]; }); // change the value function
+			path = path.data(pie); // compute the new angles
+			path.transition().duration(750).attrTween("d", arcTween) // redraw the arcs
+				.attr("fill", function(d, i) { 
+									retVal = "black";
+									if(d.value< 30){
+										retVal= "black";}
+									else if(d.value<70){
+										retVal="green";}
+									else if(d.value<90){
+										retVal="yellow";}
+									else {
+										retVal="red";
+										}
+									return retVal;})
+			titleText.transition().duration(100).text(function(d) { return "EMS Response Time " + titles;})
+			timeText.transition().duration(100).text(function(d) {return (""+id+ " Seconds");});
+			
+		  }
+		
+               
+      
 
 
+	function type(d) {
+	  d.april = +d.april;
+	  d.may = +d.may;
+	  d.june = +d.june;
+	  d.july = +d.july;
+	  return d;
+	}
 
+
+	// Store the displayed angles in _current.
+	// Then, interpolate from _current to the new angles.
+	// During the transition, _current is updated in-place by d3.interpolate.
+	function arcTween(a) {
+	  var i = d3.interpolate(this._current, a);
+	  this._current = i(0);
+	  return function(t) {
+	  return arc(i(t));
+	  };
+	}
 
  
 }
@@ -294,7 +328,7 @@ function start(){
             console.log(error);
         }
         else{
-            console.log(data);  
+              
             EMSdata1 = data;
             generateAnimations();
             generateGraph(EMSdata1);
@@ -306,13 +340,13 @@ function start(){
             console.log(error);
         }
         else{
-            console.log(data);  
+             
             EMSdata2 = data;
             generateGraph(EMSdata2);
 
         }
     })
-	d3.csv("csv/EMSdata3.csv", function(error, data) {
+	d3.tsv("csv/data.tsv",  function(error, data) {
         if (error) {
             console.log(error);
         }
@@ -320,6 +354,7 @@ function start(){
             console.log(data);  
             EMSdata3 = data;
 			
+			/*
 			var data1 = [{"label":"91", "value":91,"kl":"April"}, 
             {"label":"", "value":9, "label": ""} 
             //{"label":"three", "value":30}];
@@ -338,8 +373,8 @@ function start(){
 			var data4 = [{"label":"78", "value":78,"kl":"July"}, 
             {"label":"", "value":22, "label": ""} 
             //{"label":"three", "value":30}];
-                        ];
-			generatePieCharts(data4);
+                        ];*/
+			generatePieCharts(EMSdata3);
 			
 	
 			
