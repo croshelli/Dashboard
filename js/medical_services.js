@@ -35,7 +35,7 @@ function generateAnimations() {
 		.on("mouseover", function(d) {
 			d3.select(this).transition()
 							.attr("x", 20)
-							.duration(1000)
+							.duration(2000)
 							.delay(300);
 		});	
 		
@@ -204,15 +204,13 @@ function generateGraph(dataset) {
 /*Generate Circle Graphs*/
 
 function generatePieCharts(data){
-	var width = 960,
-    height = 500,
+	var width = 1010,
+    height = 550,
     radius = Math.min(width, height) / 2;
-   var color = d3.scale.category20();     //builtin range of colors
- 
 	
     
 	var svg = d3.select("div#graphs").append("svg")
-					.attr("class", "graphs")      //create svg element
+					.attr("class", "graphs") 					//create svg element
 					.attr("width", width+100)
 					.attr("height", height+200)
 					.attr("overflow", "visible")
@@ -326,7 +324,23 @@ function generatePieCharts(data){
  * Initializes the visualization.
  */
 function start(){
-    d3.csv("csv/EMSdata.csv", function(error, data) {
+    d3.tsv("csv/data.tsv",  function(error, data) {
+        if (error) {
+            console.log(error);
+        }
+        else{
+            console.log(data);  
+            EMSdata3 = data;
+			
+
+			generatePieCharts(EMSdata3);
+			
+	
+			
+
+        }
+    })
+	d3.csv("csv/EMSdata.csv", function(error, data) {
         if (error) {
             console.log(error);
         }
@@ -349,40 +363,6 @@ function start(){
 
         }
     })
-	d3.tsv("csv/data.tsv",  function(error, data) {
-        if (error) {
-            console.log(error);
-        }
-        else{
-            console.log(data);  
-            EMSdata3 = data;
-			
-			/*
-			var data1 = [{"label":"91", "value":91,"kl":"April"}, 
-            {"label":"", "value":9, "label": ""} 
-            //{"label":"three", "value":30}];
-                        ];
-            generatePieCharts(data1);
-			var data2 = [{"label":"75", "value":75,"kl":"May"}, 
-            {"label":"", "value":25, "label": ""} 
-            //{"label":"three", "value":30}];
-                        ];
-			generatePieCharts(data2);
-			var data3 = [{"label":"76", "value":76,"kl":"June"}, 
-            {"label":"", "value":24, "label": ""} 
-            //{"label":"three", "value":30}];
-                        ];
-            generatePieCharts(data3);
-			var data4 = [{"label":"78", "value":78,"kl":"July"}, 
-            {"label":"", "value":22, "label": ""} 
-            //{"label":"three", "value":30}];
-                        ];*/
-			generatePieCharts(EMSdata3);
-			
 	
-			
-
-        }
-    })
     
 }
