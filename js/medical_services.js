@@ -218,7 +218,7 @@ function generatePieCharts(data){
 					.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 	
 	var pie = d3.layout.pie()
-    .value(function(d) { return d.june; })
+    .value(function(d) { return d.april; })
     .sort(null);
 
 	var arc = d3.svg.arc()

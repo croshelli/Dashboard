@@ -183,7 +183,127 @@ function generateGraph(dataset) {
 	
 };
 
+/*Generate Circle Graphs*/
 
+function generatePieCharts(data){
+	var width = 1010,
+    height = 550,
+    radius = Math.min(width, height) / 2;
+	
+    
+	var svg = d3.select("div#graphs").append("svg")
+					.attr("class", "graphs") 					//create svg element
+					.attr("width", width+100)
+					.attr("height", height+200)
+					.attr("overflow", "visible")
+				.append("g")    		//make a group to hold our pie chart
+					.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+	
+	var pie = d3.layout.pie()
+    .value(function(d) { return d.jan; })
+    .sort(null);
+
+	var arc = d3.svg.arc()
+		.innerRadius(radius - 110)
+		.outerRadius(radius );
+					
+	var titleText = svg.append("text")
+		.attr("x", 0)
+		.attr("y", -10)
+		.style("font-weight", "bold")
+		.style("text-anchor", "middle")
+		.text(  "Amount of garbage collected" );
+	var timeText=svg.append("text")
+			.attr("x", 0)
+			.attr("y", 25)
+			.attr("font-size","34px")
+			.style("text-anchor", "middle")
+			.style("font-weight", "bold")
+			.text(  "" );
+						
+					
+	var path = svg.datum(data).selectAll("path")
+				  .data(pie)
+				  .enter().append("path")
+				  //.attr("fill", function(d, i) { return color(i); })
+				  .attr("fill", function(d, i) { 
+									retVal = "black";
+									if(d.value< 6000){
+										retVal= "black";}
+									else if(d.value<9000){
+										retVal="green";}
+									else if(d.value<11000){
+										retVal="yellow";}
+									else {
+										retVal="red";
+										}
+									return retVal;}) //set the color for each slice to be chosen from the color function defined above
+												 //this creates the actual SVG path using the associated data (pie) with the arc drawing function
+				  .attr("d", arc)
+				  .each(function(d) { this._current = d; }); // store the initial angles
+
+		  d3.selectAll("input")
+			  .on("change", change);
+
+		  var timeout = setTimeout(function() {
+			d3.select("input[value=\"jan\"]").property("checked", true).each(change);
+		  }, 2000);
+
+		  function change() {
+			var value = this.value;
+			var id = this.id;
+			var titles = this.title;
+			console.log(id);
+			clearTimeout(timeout);
+			pie.value(function(d) { return d[value]; }); // change the value function
+			path = path.data(pie); // compute the new angles
+			path.transition().duration(750).attrTween("d", arcTween) // redraw the arcs
+				.attr("fill", function(d, i) { 
+									retVal = "black";
+									if(d.value< 6000){
+										retVal= "black";}
+									else if(d.value<9000){
+										retVal="green";}
+									else if(d.value<11000){
+										retVal="yellow";}
+									else {
+										retVal="red";
+										}
+									return retVal;})
+			titleText.transition().duration(100).text(function(d) { return "Amount of garbage collected in " + titles+":";})
+			timeText.transition().duration(100).text(function(d) {return (""+id+ " Tons");});
+			
+		  }
+		
+               
+      
+
+
+	function type(d) {
+	  d.jan = +d.jan;
+	  d.feb = +d.feb;
+	  d.march = +d.march;
+	  d.april = +d.april;
+	  d.may = +d.may;
+	  d.june = +d.june;
+	  d.july = +d.july;
+	  return d;
+	}
+
+
+	// Store the displayed angles in _current.
+	// Then, interpolate from _current to the new angles.
+	// During the transition, _current is updated in-place by d3.interpolate.
+	function arcTween(a) {
+	  var i = d3.interpolate(this._current, a);
+	  this._current = i(0);
+	  return function(t) {
+	  return arc(i(t));
+	  };
+	}
+
+ 
+}
 
 
 
@@ -191,6 +311,22 @@ function generateGraph(dataset) {
  * Initializes the visualization.
  */
 function start(){
+d3.tsv("csv/DPWdata3.tsv",  function(error, data) {
+        if (error) {
+            console.log(error);
+        }
+        else{
+            console.log(data);  
+            DPWdata3 = data;
+			
+
+			generatePieCharts(DPWdata3);
+			
+	
+			
+
+        }
+    })
     d3.csv("csv/DPWdata1.csv", function(error, data) {
         if (error) {
             console.log(error);
