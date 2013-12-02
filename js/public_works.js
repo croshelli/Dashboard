@@ -38,12 +38,12 @@ function generateGraph1(dataset) {
 								.attr("overflow", "visible");
 								
 	canvasDetails.append("image")
-	    .attr("class", "firetruck")
-	    .attr("xlink:href", "images/firetruck_blank.png")
-		.attr("x", -50)
+	    .attr("class", "recyclebin")
+	    .attr("xlink:href", "images/recyclebin.png")
+		.attr("x", -150)
 		.attr("y", 0)
-		.attr("width", 530)
-		.attr("height", 265);
+		.attr("width", 600)
+		.attr("height", 300);
 		
 	canvasDText = canvasDetails.append("text")
 								.attr("x", 232)
@@ -116,7 +116,7 @@ function generateGraph1(dataset) {
 																	var Day = d["Day"];
 																	return (xScale(new Date( Year, Month, Day ))-5);})
 																.attr("y", function(d) {return (yScale(d["Result"])+padding-10+graphShift);});
-																firetruckText(d);
+																recyclebinText(d);
 																})
 										.on("mouseout", function(d) {
 														d3.select(this).transition()
@@ -128,9 +128,9 @@ function generateGraph1(dataset) {
 																return xScale(new Date( Year, Month, Day ));})
 																.attr("y", function(d) {return yScale(d["Result"])+padding+graphShift;});
 																})
-											.on("click", function(d){firetruckText(d)});
+											.on("click", function(d){recyclebinText(d)});
 											
-				function firetruckText(d){ var month= d["MonthName"];
+				function recyclebinText(d){ var month= d["MonthName"];
 															var result= d["Result"];
 															var target= d["Result"] - d["Target"];
 															var retVal=("In " + month + ", " + result+ "% of incidents met standards.");
@@ -147,7 +147,7 @@ function generateGraph1(dataset) {
 															canvasDText2Line.transition()
 																			.duration(100)
 																			.text(retVal2Line);}
-				function removefiretruckText(){
+				function removerecyclebinText(){
 								canvasDText.transition()
 											.duration(100)
 											.text("");
@@ -244,8 +244,8 @@ function generateGraph2(dataset) {
 								.attr("overflow", "visible");
 								
 	canvasDetails2.append("image")
-	    .attr("class", "firetruck")
-	    .attr("xlink:href", "images/firetruck_blank.png")
+	    .attr("class", "recyclebin")
+	    .attr("xlink:href", "images/recyclebin.png")
 		.attr("x", -50)
 		.attr("y", 0)
 		.attr("width", 530)
@@ -321,7 +321,7 @@ function generateGraph2(dataset) {
 																	var Day = d["Day"];
 																	return (xScale(new Date( Year, Month, Day ))-5);})
 																.attr("y", function(d) {return (yScale(d["Result"])+padding-10+graphShift);});
-																firetruckText2(d);
+																recyclebinText2(d);
 																})
 										.on("mouseout", function(d) {
 														d3.select(this).transition()
@@ -334,10 +334,10 @@ function generateGraph2(dataset) {
 																.attr("y", function(d) {return yScale(d["Result"])+padding+graphShift;});
 																
 																})
-										.on("click", function(d){firetruckText2(d)});			//have labels show up on click in blank firetrucks
+										.on("click", function(d){recyclebinText2(d)});			//have labels show up on click in blank recyclebins
 														   
 										
-				function firetruckText2(d){ var month= d["MonthName"];
+				function recyclebinText2(d){ var month= d["MonthName"];
 															var result= d["Result"];
 															var target= d["Result"] - d["Target"];
 															var retVal2=("In " + month + ", " + result+ "% of incidents met standards.");
@@ -355,7 +355,7 @@ function generateGraph2(dataset) {
 																			.duration(100)
 																			.text(retVal2Line2);
 															}
-				function removefiretruckText2(){
+				function removerecyclebinText2(){
 								canvasDText2.transition()
 											.duration(100)
 											.text("");
