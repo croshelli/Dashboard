@@ -125,15 +125,15 @@ function generateGraph1(dataset) {
 															return xScale(new Date( Year, Month, Day ));})
 										.attr("y", function(d) {return yScale(d["Result"])+padding;})
 										.attr("fill", function(d,i) { 
-															var color = "red";
+															var color = "#D95541";
 															if (d["Result"]/d["Target"] < .8){
-																color = "red";
+																color = "#D95541";
 																}
 															else if (d["Result"]/d["Target"] < 1){
-																color = "yellow";
+																color = "#F2E96B";
 																}
 															else{
-																color = "green";
+																color = "#89BD4A";
 																}
 															return color})
 										.on("mouseover", function(d){
@@ -265,18 +265,32 @@ function generateGraph2(dataset) {
 	canvasDetails2.append("image")
 	    .attr("class", "ambulance")
 	    .attr("xlink:href", "images/ambulance_blank.png")
-		.attr("x", 0)
-		.attr("y", 20)
-		.attr("width", 450)
-		.attr("height", 225);
+		.attr("x", -50)
+		.attr("y", 0)
+		.attr("width", 530)
+		.attr("height", 265);
 		
 	canvasDText2 = canvasDetails2.append("text")
-								.attr("x", 100)
-								.attr("y", 100)
-								.attr("width",50)
-								.attr("height", 200)
+								.attr("x", 262)
+								.attr("y", 80)
+								.attr("font-size","20px")
 								.style("text-anchor", "middle")
-								.text(  "EMS Response Time" );
+								.style("font-weight", "bold")
+								.text("");
+	canvasDText2Line2 = canvasDetails2.append("text")
+								.attr("x", 262)
+								.attr("y", 100)
+								.attr("font-size","20px")
+								.style("text-anchor", "middle")
+								.style("font-weight", "bold")
+								.text("");
+	canvasDText3Line2 = canvasDetails2.append("text")
+								.attr("x", 262)
+								.attr("y", 160)
+								.attr("font-size","20px")
+								.style("text-anchor", "middle")
+								.style("font-weight", "bold")
+								.text("");
 				
 	//barchart for results of EMSdata1
 	var yScale = d3.scale.linear()
@@ -312,15 +326,15 @@ function generateGraph2(dataset) {
 															return xScale(new Date( Year, Month, Day ));})
 										.attr("y", function(d) {return yScale(d["Result"])+padding;})
 										.attr("fill", function(d,i) { 
-															var color = "red";
+															var color = "#D95541";
 															if (d["Result"]/d["Target"] < .8){
-																color = "red";
+																color = "#D95541";
 																}
 															else if (d["Result"]/d["Target"] < 1){
-																color = "yellow";
+																color = "#F2E96B";
 																}
 															else{
-																color = "green";
+																color = "#89BD4A";
 																}
 															return color})
 											.on("mouseover", function(d){
@@ -345,19 +359,27 @@ function generateGraph2(dataset) {
 																})
 															
 											.on("click", function(d){				//have labels show up on click in blank ambulances
-														    var month2= d["MonthName"];
-															var result2= d["Result"];
-															var target2= d["Result"] - d["Target"];
-															var retVal2=("In " + month2 + ", " + result2+ "% of incidents met standards. ");
-															if (target2 < 0){
-																retVal2 = (retVal2 + target2 + "% below Atlanta's target rate."); }
-															else if (target2> 0){
-																retVal2 = (retVal2 + target2 + "% above Atlanta's target rate!"); }
+														    var month= d["MonthName"];
+															var result= d["Result"];
+															var target= d["Result"] - d["Target"];
+															var retVal2=("In " + month + ", " + result+ "% of incidents");
+															var retVal2Line2=("met standards.");
+															var retVal3Line2=("");
+															if (target < 0){
+																retVal3Line2 = (retVal3Line2 + target + "% below Atlanta's target rate."); }
+															else if (target> 0){
+																retVal3Line2 = (retVal3Line2 + target + "% above Atlanta's target rate!"); }
 															else{
-																retVal2 = (retVal2 + "meeting Atlanta's target rate!");}
+																retVal3Line2 = (retVal3Line2 + "meeting Atlanta's target rate!");}
 															canvasDText2.transition()
-																			.duration(400)
-																			.text(retVal2);});
+																			.duration(100)
+																			.text(retVal2);
+															canvasDText2Line2.transition()
+																			.duration(100)
+																			.text(retVal2Line2);
+															canvasDText3Line2.transition()
+																				.duration(100)
+																				.text(retVal3Line2);});
 										
 						
 				//monthly results
@@ -457,11 +479,11 @@ function generatePieCharts(data){
 									if(d.value< 30){
 										retVal= "black";}
 									else if(d.value<70){
-										retVal="green";}
+										retVal="#89BD4A";}
 									else if(d.value<90){
-										retVal="yellow";}
+										retVal="#F2E96B";}
 									else {
-										retVal="red";
+										retVal="#D95541";
 										}
 									return retVal;}) //set the color for each slice to be chosen from the color function defined above
 												 //this creates the actual SVG path using the associated data (pie) with the arc drawing function
@@ -489,11 +511,11 @@ function generatePieCharts(data){
 									if(d.value< 30){
 										retVal= "black";}
 									else if(d.value<70){
-										retVal="green";}
+										retVal="#89BD4A";}
 									else if(d.value<90){
-										retVal="yellow";}
+										retVal="#F2E96B";}
 									else {
-										retVal="red";
+										retVal="#D95541";
 										}
 									return retVal;})
 			titleText.transition().duration(100).text(function(d) { return "EMS Response Time in " + titles+":";})
