@@ -70,21 +70,21 @@ function generateGraph1(dataset) {
 		
 	canvasDText = canvasDetails.append("text")
 								.attr("x", 262)
-								.attr("y", 100)
+								.attr("y", 80)
 								.attr("font-size","20px")
 								.style("text-anchor", "middle")
 								.style("font-weight", "bold")
 								.text("");
 	canvasDText2Line = canvasDetails.append("text")
 								.attr("x", 262)
-								.attr("y", 120)
+								.attr("y", 100)
 								.attr("font-size","20px")
 								.style("text-anchor", "middle")
 								.style("font-weight", "bold")
 								.text("");
 	canvasDText3Line = canvasDetails.append("text")
 								.attr("x", 262)
-								.attr("y", 140)
+								.attr("y", 160)
 								.attr("font-size","20px")
 								.style("text-anchor", "middle")
 								.style("font-weight", "bold")
@@ -136,7 +136,7 @@ function generateGraph1(dataset) {
 																color = "green";
 																}
 															return color})
-											.on("mouseover", function(d){
+										.on("mouseover", function(d){
 															d3.select(this).transition()
 																.attr("width", rectWidth+10)
 																.attr("height",function(d) {return (chartY - yScale(d["Result"])+10) ;})
@@ -172,7 +172,7 @@ function generateGraph1(dataset) {
 															canvasDText.transition()
 																			.duration(100)
 																			.text(retVal);
-															canvasDText.transition()
+															canvasDText2Line.transition()
 																			.duration(100)
 																			.text(retVal2Line);
 															canvasDText3Line.transition()
@@ -243,7 +243,7 @@ function generateGraph1(dataset) {
 		.attr("x", chartWidth/2 + padding/2 )
 		.attr("y", 0+padding)
 		.style("text-anchor", "middle")
-		.text( "% EMS Incidents Meeting SORC - ALS");
+		.text( "% EMS Incidents Meeting Standards - ALS");
 };
 function generateGraph2(dataset) {
     
@@ -406,7 +406,7 @@ function generateGraph2(dataset) {
 		.attr("x", chartWidth/2 + padding/2 )
 		.attr("y", 0+padding)
 		.style("text-anchor", "middle")
-		.text("% EMS Incidents Meeting SORC - BLS");
+		.text("% EMS Incidents Meeting Standards - BLS");
 };
 
 /*Generate Circle Graphs*/
