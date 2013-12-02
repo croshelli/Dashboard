@@ -140,8 +140,11 @@ p {
 	height: 50px;
 	left: 30px;
 	position: relative;
-	top: 10px;
-	width: 400px;
+	top: -10px;
+	width: 325px;
+	background: #C0D9ED;		
+	border: 3px solid #5E92BD;
+	border-radius: 15px;
 }
 
 
