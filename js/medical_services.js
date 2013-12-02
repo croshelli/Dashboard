@@ -44,12 +44,14 @@ function generateAnimations() {
 }
  
 function generateGraph1(dataset) {
-    
+   
+   //moves the bar graph up or down
+   var graphShift = 25;
    
    var canvas = d3.select("div#graphs").append("svg")
 							.attr("class", "graphs")
 							.attr("width", width*2)
-							.attr("height", height+10)
+							.attr("height", height+10+graphShift)
 							.attr("overflow", "visible");
 	
 	var canvasDetails = canvas.append("svg:svg")
@@ -123,7 +125,7 @@ function generateGraph1(dataset) {
 																	var Day = d["Day"];
 																	console.log(d["Result"]);
 															return xScale(new Date( Year, Month, Day ));})
-										.attr("y", function(d) {return yScale(d["Result"])+padding;})
+										.attr("y", function(d) {return yScale(d["Result"])+padding +graphShift;})
 										.attr("fill", function(d,i) { 
 															var color = "#D95541";
 															if (d["Result"]/d["Target"] < .8){
@@ -144,7 +146,7 @@ function generateGraph1(dataset) {
 																	var Month =d["Month"];
 																	var Day = d["Day"];
 																	return (xScale(new Date( Year, Month, Day ))-5);})
-																.attr("y", function(d) {return (yScale(d["Result"])+padding-10);});
+																.attr("y", function(d) {return (yScale(d["Result"])+padding-10+graphShift);});
 																ambulanceText(d);
 																})
 										.on("mouseout", function(d) {
@@ -155,7 +157,7 @@ function generateGraph1(dataset) {
 																	var Month =d["Month"];
 																	var Day = d["Day"];
 																return xScale(new Date( Year, Month, Day ));})
-																.attr("y", function(d) {return yScale(d["Result"])+padding;});
+																.attr("y", function(d) {return yScale(d["Result"])+padding+graphShift;});
 																})
 											.on("click", function(d){ambulanceText(d)});
 											
@@ -193,7 +195,7 @@ function generateGraph1(dataset) {
 										
 						
 				//monthly results
-				canvas.selectAll("text")
+				/*canvas.selectAll("text")
 						.data(dataset)
 						.enter()	
 							.append("text") 
@@ -208,14 +210,14 @@ function generateGraph1(dataset) {
 							.attr("fill", "black")
 							.attr("font-family", "sans-serif")
 							.attr("font-size", "11px")
-							.attr("text-anchor", "middle");
+							.attr("text-anchor", "middle");*/
 							
 				//Line that shows target results
 				canvas.data(dataset).append("line")
 						.attr("x1", chartX)
-						.attr("y1", function (d) {return  yScale(d["Target"])+padding;})
+						.attr("y1", function (d) {return  yScale(d["Target"])+padding+graphShift;})
 						.attr("x2",  chartWidth+(padding/2))
-						.attr("y2", function(d) {return yScale(d["Target"])+padding;})
+						.attr("y2", function(d) {return yScale(d["Target"])+padding+graphShift;})
 						.attr("stroke", "black")
 						.attr("stroke-width", 1)
 						    .on("mouseover", function(d) {      
@@ -237,12 +239,12 @@ function generateGraph1(dataset) {
 									
 			    canvas.append("g")
 					.attr("class", "axis")
-					.attr("transform", "translate(30," + padding+ ")")
+					.attr("transform", "translate(30," +( padding +graphShift)+ ")")
 					.call(yaxis);	
 			
 				canvas.append("g")
 					.attr("class", "axis")
-					.attr("transform", "translate(0,"+ (chartY + padding) + ")")
+					.attr("transform", "translate(0,"+ (chartY + padding+graphShift) + ")")
 					.call(xaxis)
 					.selectAll(".tick text")
 						.style("text-anchor", "middle")
@@ -254,15 +256,18 @@ function generateGraph1(dataset) {
 		.attr("x", chartWidth/2 + padding/2 )
 		.attr("y", 0+padding)
 		.style("text-anchor", "middle")
+		.style("font-weight", "bold")
+		.attr("font-size","18px")
 		.text( "% EMS Incidents Meeting Standards - ALS");
 };
 function generateGraph2(dataset) {
     
-   
+   //moves the bar graph up or down
+   var graphShift = 25;
    var canvas2 = d3.select("div#graphs").append("svg")
 							.attr("class", "graphs")
 							.attr("width", width*2)
-							.attr("height", height+10)
+							.attr("height", height+10+graphShift)
 							.attr("overflow", "visible");
 	
 	var canvasDetails2 = canvas2.append("svg:svg")
@@ -335,7 +340,7 @@ function generateGraph2(dataset) {
 																	var Month =d["Month"];
 																	var Day = d["Day"];
 															return xScale(new Date( Year, Month, Day ));})
-										.attr("y", function(d) {return yScale(d["Result"])+padding;})
+										.attr("y", function(d) {return yScale(d["Result"])+padding+graphShift;})
 										.attr("fill", function(d,i) { 
 															var color = "#D95541";
 															if (d["Result"]/d["Target"] < .8){
@@ -356,7 +361,7 @@ function generateGraph2(dataset) {
 																	var Month =d["Month"];
 																	var Day = d["Day"];
 																	return (xScale(new Date( Year, Month, Day ))-5);})
-																.attr("y", function(d) {return (yScale(d["Result"])+padding-10);});
+																.attr("y", function(d) {return (yScale(d["Result"])+padding-10+graphShift);});
 																ambulanceText2(d);
 																})
 										.on("mouseout", function(d) {
@@ -367,7 +372,7 @@ function generateGraph2(dataset) {
 																	var Month =d["Month"];
 																	var Day = d["Day"];
 																return xScale(new Date( Year, Month, Day ));})
-																.attr("y", function(d) {return yScale(d["Result"])+padding;});
+																.attr("y", function(d) {return yScale(d["Result"])+padding+graphShift;});
 																
 																})
 										.on("click", function(d){ambulanceText2(d)});			//have labels show up on click in blank ambulances
@@ -406,7 +411,7 @@ function generateGraph2(dataset) {
 												.text("");}
 				
 				//monthly results
-				canvas2.selectAll("text")
+				/*canvas2.selectAll("text")
 						.data(dataset)
 						.enter()	
 							.append("text") 
@@ -419,14 +424,14 @@ function generateGraph2(dataset) {
 							.attr("fill", "black")
 							.attr("font-family", "sans-serif")
 							.attr("font-size", "11px")
-							.attr("text-anchor", "middle");
+							.attr("text-anchor", "middle");*/
 							
 				//Line that shows target results
 				canvas2.data(dataset).append("line")
 						.attr("x1", chartX)
-						.attr("y1", function (d) {return  yScale(d["Target"])+padding;})
+						.attr("y1", function (d) {return  yScale(d["Target"])+padding+graphShift;})
 						.attr("x2",  chartWidth+(padding/2))
-						.attr("y2", function(d) {return yScale(d["Target"])+padding;})
+						.attr("y2", function(d) {return yScale(d["Target"])+padding+graphShift;})
 						.attr("stroke", "black")
 						.attr("stroke-width", 1);
 
@@ -434,12 +439,12 @@ function generateGraph2(dataset) {
 									
 			    canvas2.append("g")
 					.attr("class", "axis")
-					.attr("transform", "translate(30," + padding+ ")")
+					.attr("transform", "translate(30," + (padding+graphShift)+ ")")
 					.call(yaxis);	
 			
 				canvas2.append("g")
 					.attr("class", "axis")
-					.attr("transform", "translate(0,"+ (chartY + padding) + ")")
+					.attr("transform", "translate(0,"+ (chartY + padding+graphShift) + ")")
 					.call(xaxis)
 					.selectAll(".tick text")
 						.style("text-anchor", "middle")
@@ -451,6 +456,8 @@ function generateGraph2(dataset) {
 		.attr("x", chartWidth/2 + padding/2 )
 		.attr("y", 0+padding)
 		.style("text-anchor", "middle")
+		.style("font-weight", "bold")
+		.attr("font-size","18px")
 		.text("% EMS Incidents Meeting Standards - BLS");
 };
 
