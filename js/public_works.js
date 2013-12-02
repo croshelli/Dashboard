@@ -46,26 +46,20 @@ function generateGraph1(dataset) {
 		.attr("height", 265);
 		
 	canvasDText = canvasDetails.append("text")
-								.attr("x", 262)
-								.attr("y", 80)
+								.attr("x", 232)
+								.attr("y", 140)
 								.attr("font-size","20px")
 								.style("text-anchor", "middle")
 								.style("font-weight", "bold")
 								.text("");
 	canvasDText2Line = canvasDetails.append("text")
-								.attr("x", 262)
-								.attr("y", 100)
+								.attr("x", 232)
+								.attr("y", 170)
 								.attr("font-size","20px")
 								.style("text-anchor", "middle")
 								.style("font-weight", "bold")
 								.text("");
-	canvasDText3Line = canvasDetails.append("text")
-								.attr("x", 262)
-								.attr("y", 160)
-								.attr("font-size","20px")
-								.style("text-anchor", "middle")
-								.style("font-weight", "bold")
-								.text("");
+
 				
 	//barchart for results of EMSdata1
 	var yScale = d3.scale.linear()
@@ -139,24 +133,20 @@ function generateGraph1(dataset) {
 				function firetruckText(d){ var month= d["MonthName"];
 															var result= d["Result"];
 															var target= d["Result"] - d["Target"];
-															var retVal=("In " + month + ", " + result+ "% of incidents");
-															var retVal2Line=("met standards.");
-															var retVal3Line=("");
+															var retVal=("In " + month + ", " + result+ "% of incidents met standards.");
+															var retVal2Line=("");
 															if (target < 0){
-																retVal3Line = (retVal3Line + target + "% below Atlanta's target rate."); }
+																retVal2Line = (retVal2Line + target + "% below Atlanta's target rate."); }
 															else if (target> 0){
-																retVal3Line = (retVal3Line + target + "% above Atlanta's target rate!"); }
+																retVal2Line = (retVal2Line + target + "% above Atlanta's target rate!"); }
 															else{
-																retVal3Line = (retVal3Line + "meeting Atlanta's target rate!");}
+																retVal2Line = (retVal2Line + "meeting Atlanta's target rate!");}
 															canvasDText.transition()
 																			.duration(100)
 																			.text(retVal);
 															canvasDText2Line.transition()
 																			.duration(100)
-																			.text(retVal2Line);
-															canvasDText3Line.transition()
-																				.duration(100)
-																				.text(retVal3Line);}
+																			.text(retVal2Line);}
 				function removefiretruckText(){
 								canvasDText.transition()
 											.duration(100)
@@ -262,26 +252,20 @@ function generateGraph2(dataset) {
 		.attr("height", 265);
 		
 	canvasDText2 = canvasDetails2.append("text")
-								.attr("x", 262)
-								.attr("y", 80)
+								.attr("x", 232)
+								.attr("y", 140)
 								.attr("font-size","20px")
 								.style("text-anchor", "middle")
 								.style("font-weight", "bold")
 								.text("");
 	canvasDText2Line2 = canvasDetails2.append("text")
-								.attr("x", 262)
-								.attr("y", 100)
+								.attr("x", 232)
+								.attr("y", 170)
 								.attr("font-size","20px")
 								.style("text-anchor", "middle")
 								.style("font-weight", "bold")
 								.text("");
-	canvasDText3Line2 = canvasDetails2.append("text")
-								.attr("x", 262)
-								.attr("y", 160)
-								.attr("font-size","20px")
-								.style("text-anchor", "middle")
-								.style("font-weight", "bold")
-								.text("");
+
 				
 	//barchart for results of EMSdata1
 	var yScale = d3.scale.linear()
@@ -356,24 +340,21 @@ function generateGraph2(dataset) {
 				function firetruckText2(d){ var month= d["MonthName"];
 															var result= d["Result"];
 															var target= d["Result"] - d["Target"];
-															var retVal2=("In " + month + ", " + result+ "% of incidents");
-															var retVal2Line2=("met standards.");
-															var retVal3Line2=("");
+															var retVal2=("In " + month + ", " + result+ "% of incidents met standards.");
+															var retVal2Line2=("");
 															if (target < 0){
-																retVal3Line2 = (retVal3Line2 + target + "% below Atlanta's target rate."); }
+																retVal2Line2 = (retVal2Line2 + target + "% below Atlanta's target rate."); }
 															else if (target> 0){
-																retVal3Line2 = (retVal3Line2 + target + "% above Atlanta's target rate!"); }
+																retVal2Line2 = (retVal2Line2 + target + "% above Atlanta's target rate!"); }
 															else{
-																retVal3Line2 = (retVal3Line2 + "meeting Atlanta's target rate!");}
+																retVal2Line2 = (retVal2Line2 + "meeting Atlanta's target rate!");}
 															canvasDText2.transition()
 																			.duration(100)
 																			.text(retVal2);
 															canvasDText2Line2.transition()
 																			.duration(100)
 																			.text(retVal2Line2);
-															canvasDText3Line2.transition()
-																				.duration(100)
-																				.text(retVal3Line2);}
+															}
 				function removefiretruckText2(){
 								canvasDText2.transition()
 											.duration(100)
