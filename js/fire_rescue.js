@@ -135,24 +135,21 @@ function generateGraph1(dataset) {
 				function firetruckText(d){ var month= d["MonthName"];
 															var result= d["Result"];
 															var target= d["Result"] - d["Target"];
-															var retVal=("In " + month + ", " + result+ "% of incidents");
-															var retVal2Line=("met standards.");
-															var retVal3Line=("");
+															var retVal=("In " + month + ", " + result+ "% of incidents met standards");
+															var retVal2Line=("");
 															if (target < 0){
-																retVal3Line = (retVal3Line + target + "% below Atlanta's target rate."); }
+																retVal2Line = (retVal2Line + target + "% below Atlanta's target rate."); }
 															else if (target> 0){
-																retVal3Line = (retVal3Line + target + "% above Atlanta's target rate!"); }
+																retVal2Line = (retVal2Line + target + "% above Atlanta's target rate!"); }
 															else{
-																retVal3Line = (retVal3Line + "meeting Atlanta's target rate!");}
+																retVal2Line = (retVal2Line + "meeting Atlanta's target rate!");}
 															canvasDText.transition()
 																			.duration(100)
 																			.text(retVal);
 															canvasDText2Line.transition()
 																			.duration(100)
 																			.text(retVal2Line);
-															canvasDText3Line.transition()
-																				.duration(100)
-																				.text(retVal3Line);}
+															}
 				function removefiretruckText(){
 								canvasDText.transition()
 											.duration(100)
@@ -190,21 +187,7 @@ function generateGraph1(dataset) {
 						.attr("x2",  chartWidth+(padding/2))
 						.attr("y2", function(d) {return yScale(d["Target"])+padding+graphShift;})
 						.attr("stroke", "black")
-						.attr("stroke-width", 1)
-						    .on("mouseover", function(d) {      
-								div.transition()        
-									.duration(400)   
-									.style("opacity", .9);      
-									var retVal = "Target Rate of: " + d["Target"];
-								div .html(retVal)  
-									.style("left", (d3.event.pageX) + "px")     
-									.style("top", (d3.event.pageY - 28) + "px");    
-								})                  
-							.on("mouseout", function(d) {       
-								div.transition()        
-									.duration(500)      
-									.style("opacity", 0);   
-							});
+						.attr("stroke-width", 1);
 
 						
 									
@@ -229,7 +212,7 @@ function generateGraph1(dataset) {
 		.style("text-anchor", "middle")
 		.style("font-weight", "bold")
 		.attr("font-size","18px")
-		.text( "% EMS Incidents Meeting Standards - ALS");
+		.text( "% Fire Incidents Meeting Standards");
 };
 function generateGraph2(dataset) {
     
@@ -381,21 +364,7 @@ function generateGraph2(dataset) {
 												.duration(100)
 												.text("");}
 				
-				//monthly results
-				/*canvas2.selectAll("text")
-						.data(dataset)
-						.enter()	
-							.append("text") 
-							.text(function(d) {return "" + d["Result"];})
-							.attr("x", function(d, i) { var Year = d["Year"];
-														var Month =d["Month"];
-														var Day = d["Day"];
-														return (xScale(new Date( Year, Month, Day )) + rectWidth/2);})
-							.attr("y", function(d) {return  yScale(d["Result"]) + 10 +padding;})
-							.attr("fill", "black")
-							.attr("font-family", "sans-serif")
-							.attr("font-size", "11px")
-							.attr("text-anchor", "middle");*/
+				
 							
 				//Line that shows target results
 				canvas2.data(dataset).append("line")
@@ -571,15 +540,14 @@ function start(){
 
         }
     })
-	d3.csv("csv/EMSdata.csv", function(error, data) {
+	d3.csv("csv/Firedata1.csv", function(error, data) {
         if (error) {
             console.log(error);
         }
         else{
               
-            EMSdata1 = data;
-            generateAnimations();
-            generateGraph1(EMSdata1);
+            Firedata1 = data;
+            generateGraph1(Firedata1);
 
         }
     })
