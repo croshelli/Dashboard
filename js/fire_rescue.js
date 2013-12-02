@@ -1,5 +1,5 @@
 //js code
-var EMSdata1;
+var Firedata1, Firedata2,Firedata3;
 
 var svg;
 var xAxis;
@@ -400,12 +400,18 @@ function generatePieCharts(data){
 		.innerRadius(radius - 80)
 		.outerRadius(radius);
 					
+	var titleText2 = svg.append("text")
+		.attr("x", 0)
+		.attr("y", -30)
+		.style("font-weight", "bold")
+		.style("text-anchor", "middle")
+		.text(  "Fire Truck Response Time" );
 	var titleText = svg.append("text")
 		.attr("x", 0)
 		.attr("y", -10)
 		.style("font-weight", "bold")
 		.style("text-anchor", "middle")
-		.text(  "EMS Response Time" );
+		.text(  "" );
 	var timeText=svg.append("text")
 			.attr("x", 0)
 			.attr("y", 25)
@@ -421,7 +427,7 @@ function generatePieCharts(data){
 				  //.attr("fill", function(d, i) { return color(i); })
 				  .attr("fill", function(d, i) { 
 									retVal = "black";
-									if(d.value< 30){
+									if(d.value< 45){
 										retVal= "black";}
 									else if(d.value<70){
 										retVal="#89BD4A";}
@@ -453,7 +459,7 @@ function generatePieCharts(data){
 			path.transition().duration(750).attrTween("d", arcTween) // redraw the arcs
 				.attr("fill", function(d, i) { 
 									retVal = "black";
-									if(d.value< 30){
+									if(d.value< 45){
 										retVal= "black";}
 									else if(d.value<70){
 										retVal="#89BD4A";}
@@ -463,7 +469,7 @@ function generatePieCharts(data){
 										retVal="#D95541";
 										}
 									return retVal;})
-			titleText.transition().duration(100).text(function(d) { return "EMS Response Time in " + titles+":";})
+			titleText.transition().duration(100).text(function(d) { return "in " + titles+":";})
 			timeText.transition().duration(100).text(function(d) {return (""+id+ " Seconds");});
 			
 		  }
@@ -499,16 +505,16 @@ function generatePieCharts(data){
  * Initializes the visualization.
  */
 function start(){
-    d3.tsv("csv/data.tsv",  function(error, data) {
+    d3.tsv("csv/Firedata2.tsv",  function(error, data) {
         if (error) {
             console.log(error);
         }
         else{
             console.log(data);  
-            EMSdata3 = data;
+            Firedata2 = data;
 			
 
-			generatePieCharts(EMSdata3);
+			generatePieCharts(Firedata2);
 			
 	
 			
