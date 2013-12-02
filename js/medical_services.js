@@ -37,19 +37,36 @@ function generateAnimations() {
 							.attr("x", 20)
 							.duration(1000)
 							.delay(100);
-		});		
+		});	
+		
+		
+	
 }
-
+ 
 function generateGraph(dataset) {
     
    currChart++;
    var canvas = d3.select("div#graphs").append("svg")
 							.attr("class", "graphs")
-							.attr("width", width)
-							.attr("height", height)
+							.attr("width", width*2)
+							.attr("height", height+10)
 							.attr("overflow", "visible");
-							
-						
+	
+	var canvasDetails = canvas.append("svg:svg")
+								.attr("class", "details")
+								.attr("width",width-10)
+								.attr("height", height)
+								.attr("x", width)
+								.attr("y", 0)
+								.attr("overflow", "visible");
+								
+	canvasDetails.append("image")
+	    .attr("id", "movingAmbulance")
+	    .attr("xlink:href", "home_images/ambulance.png")
+		.attr("x", 0)
+		.attr("y", 20)
+		.attr("width", 450)
+		.attr("height", 225);
 				
 	//barchart for results of EMSdata1
 	var yScale = d3.scale.linear()
@@ -181,7 +198,7 @@ function generateGraph(dataset) {
 						.attr("x", rectWidth/2)
 						.attr("y", 4);
 		
-		canvas.append("text")
+			canvas.append("text")
 		.data(dataset)
 		.attr("x", chartWidth/2 + padding/2 )
 		.attr("y", 0+padding)
@@ -330,7 +347,7 @@ function start(){
             EMSdata3 = data;
 			
 
-			//generatePieCharts(EMSdata3);
+			generatePieCharts(EMSdata3);
 			
 	
 			
