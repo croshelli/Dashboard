@@ -132,7 +132,7 @@ p {
 form {
     left: 625px;
     position: relative;
-    top: 100px;
+    top: -425px;
     width: 400px;
 }
 
@@ -211,6 +211,19 @@ div.rightColumn {
 div.secondRow {
 	margin-top: 150px;
 }
+
+div.thirdRow {
+	margin-top: 150px;
+	height: 375px;
+	width: 360px;
+	background: #C0D9ED;		
+	border: 3px solid #5E92BD;
+	border-radius: 15px;
+	line-height: 150%;	
+	margin-left: 0;
+	padding: 0px 20px 20px 0px;
+}
+
 
 div.box {
 	height: 250px;
