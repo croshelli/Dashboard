@@ -18,18 +18,54 @@ var rectWidth = 30;
 
 start();
 
-function generateGraph(dataset) {
-    
-	currChart++;
+function generateGraph1(dataset) {
+   
+   //moves the bar graph up or down
+   var graphShift = 25;
+   
    var canvas = d3.select("div#graphs").append("svg")
 							.attr("class", "graphs")
-							.attr("x", padding)
-							.attr("y", padding)
-							.attr("width", width)
-							.attr("height", height)
+							.attr("width", width*2)
+							.attr("height", height+10+graphShift)
 							.attr("overflow", "visible");
-							
-						
+	
+	var canvasDetails = canvas.append("svg:svg")
+								.attr("class", "details")
+								.attr("width",width-10)
+								.attr("height", height)
+								.attr("x", width)
+								.attr("y", 0)
+								.attr("overflow", "visible");
+								
+	canvasDetails.append("image")
+	    .attr("class", "firetruck")
+	    .attr("xlink:href", "images/firetruck_blank.png")
+		.attr("x", -50)
+		.attr("y", 0)
+		.attr("width", 530)
+		.attr("height", 265);
+		
+	canvasDText = canvasDetails.append("text")
+								.attr("x", 262)
+								.attr("y", 80)
+								.attr("font-size","20px")
+								.style("text-anchor", "middle")
+								.style("font-weight", "bold")
+								.text("");
+	canvasDText2Line = canvasDetails.append("text")
+								.attr("x", 262)
+								.attr("y", 100)
+								.attr("font-size","20px")
+								.style("text-anchor", "middle")
+								.style("font-weight", "bold")
+								.text("");
+	canvasDText3Line = canvasDetails.append("text")
+								.attr("x", 262)
+								.attr("y", 160)
+								.attr("font-size","20px")
+								.style("text-anchor", "middle")
+								.style("font-weight", "bold")
+								.text("");
 				
 	//barchart for results of EMSdata1
 	var yScale = d3.scale.linear()
@@ -37,8 +73,8 @@ function generateGraph(dataset) {
 				.range([ 200,0 ]);
 				
 	var xScale = d3.time.scale()
-				.domain([new Date(2013, 0,1), new Date(2013, 6, 31)]) //changed the start date, so that jan bar wouldn't be flushed agaisnt the y-axis
-				.range([padding, chartWidth]);
+				.domain([new Date(2013, 0,1), new Date(2013, 6, 31)])
+				.range([0+padding, chartWidth]);
 	
 	var xaxis = d3.svg.axis()
 				.scale(xScale)
@@ -51,10 +87,6 @@ function generateGraph(dataset) {
 					.ticks(5)
 					.scale(yScale)
 					.orient("left");
-			
-	var div = d3.select("body").append("div")
-					.attr("class", "tooltip")
-					.style("opacity", 0);
 				
 				//bars in graph				
 				var bars = canvas.selectAll("rect")
@@ -66,53 +98,85 @@ function generateGraph(dataset) {
 										.attr("x", function(d, i) { var Year = d["Year"];
 																	var Month =d["Month"];
 																	var Day = d["Day"];
-														//console.log( xScale(new Date(Year, Month, Day)));
-														return xScale(new Date( Year, Month, Day ));})
-										.attr("y", function(d) {return yScale(d["Result"])+padding;})
+																	console.log(d["Result"]);
+															return xScale(new Date( Year, Month, Day ));})
+										.attr("y", function(d) {return yScale(d["Result"])+padding +graphShift;})
 										.attr("fill", function(d,i) { 
-															var color = "red";
+															var color = "#D95541";
 															if (d["Result"]/d["Target"] < .8){
-																color = "red";
+																color = "#D95541";
 																}
 															else if (d["Result"]/d["Target"] < 1){
-																color = "yellow";
+																color = "#F2E96B";
 																}
 															else{
-																color = "green";
+																color = "#89BD4A";
 																}
 															return color})
 										.on("mouseover", function(d){
-															div.transition()
-																.duration(400)
-																.style("opacity", .9);
-																var month= d["MonthName"];
-																var result= d["Result"];
-																var target= d["Result"] - d["Target"];
-																var retVal=("In " + month + ", " + result+ "% of incidents met standards. ");
-																if (target < 0){
-																	retVal = (retVal + target + "% below Atlanta's target rate."); }
-																else if (target> 0){
-																	retVal = (retVal + target + "% above Atlanta's target rate!"); }
-																else{
-																	retVal = (retVal + "meeting Atlanta's target rate!");}
-															div.html( retVal)
-																.style("left", (d3.event.pageX) + "px")
-																.style("top", (d3.event.pageY-28) +"px");
-															})
+															d3.select(this).transition()
+																.attr("width", rectWidth+10)
+																.attr("height",function(d) {return (chartY - yScale(d["Result"])+10) ;})
+																.attr("x", function(d, i) { var Year = d["Year"];
+																	var Month =d["Month"];
+																	var Day = d["Day"];
+																	return (xScale(new Date( Year, Month, Day ))-5);})
+																.attr("y", function(d) {return (yScale(d["Result"])+padding-10+graphShift);});
+																firetruckText(d);
+																})
 										.on("mouseout", function(d) {
-															div.transition()
-																.duration(500)
-																.style("opacity", 0);
-															});
-																
-		
+														d3.select(this).transition()
+																.attr("width", rectWidth)
+																.attr("height",function(d) {return (chartY - yScale(d["Result"])) ;})
+																.attr("x", function(d, i) { var Year = d["Year"];
+																	var Month =d["Month"];
+																	var Day = d["Day"];
+																return xScale(new Date( Year, Month, Day ));})
+																.attr("y", function(d) {return yScale(d["Result"])+padding+graphShift;});
+																})
+											.on("click", function(d){firetruckText(d)});
+											
+				function firetruckText(d){ var month= d["MonthName"];
+															var result= d["Result"];
+															var target= d["Result"] - d["Target"];
+															var retVal=("In " + month + ", " + result+ "% of incidents");
+															var retVal2Line=("met standards.");
+															var retVal3Line=("");
+															if (target < 0){
+																retVal3Line = (retVal3Line + target + "% below Atlanta's target rate."); }
+															else if (target> 0){
+																retVal3Line = (retVal3Line + target + "% above Atlanta's target rate!"); }
+															else{
+																retVal3Line = (retVal3Line + "meeting Atlanta's target rate!");}
+															canvasDText.transition()
+																			.duration(100)
+																			.text(retVal);
+															canvasDText2Line.transition()
+																			.duration(100)
+																			.text(retVal2Line);
+															canvasDText3Line.transition()
+																				.duration(100)
+																				.text(retVal3Line);}
+				function removefiretruckText(){
+								canvasDText.transition()
+											.duration(100)
+											.text("");
+							canvasDText2Line2.transition()
+											.duration(100)
+											.text("");
+							canvasDText3Line2.transition()
+												.duration(100)
+												.text("");}												
+										
 						
 				//monthly results
-				canvas.selectAll("text")
+				/*canvas.selectAll("text")
 						.data(dataset)
 						.enter()	
 							.append("text") 
-							.text(function(d) {return "" + d["Result"];})
+							.text(function(d) {
+								console.log(d["Result"]);
+								return "" + d["Result"];})
 							.attr("x", function(d, i) { var Year = d["Year"];
 														var Month =d["Month"];
 														var Day = d["Day"];
@@ -121,14 +185,14 @@ function generateGraph(dataset) {
 							.attr("fill", "black")
 							.attr("font-family", "sans-serif")
 							.attr("font-size", "11px")
-							.attr("text-anchor", "middle");
+							.attr("text-anchor", "middle");*/
 							
 				//Line that shows target results
 				canvas.data(dataset).append("line")
 						.attr("x1", chartX)
-						.attr("y1", function (d) {return  yScale(d["Target"])+padding;})
-						.attr("x2",  chartWidth)
-						.attr("y2", function(d) {return yScale(d["Target"])+padding;})
+						.attr("y1", function (d) {return  yScale(d["Target"])+padding+graphShift;})
+						.attr("x2",  chartWidth+(padding/2))
+						.attr("y2", function(d) {return yScale(d["Target"])+padding+graphShift;})
 						.attr("stroke", "black")
 						.attr("stroke-width", 1)
 						    .on("mouseover", function(d) {      
@@ -150,37 +214,226 @@ function generateGraph(dataset) {
 									
 			    canvas.append("g")
 					.attr("class", "axis")
-					.attr("transform", "translate(30," + padding+ ")")
+					.attr("transform", "translate(30," +( padding +graphShift)+ ")")
 					.call(yaxis);	
 			
 				canvas.append("g")
 					.attr("class", "axis")
-					.attr("transform", "translate(0,"+ (chartY + padding) + ")")
+					.attr("transform", "translate(0,"+ (chartY + padding+graphShift) + ")")
 					.call(xaxis)
 					.selectAll(".tick text")
 						.style("text-anchor", "middle")
 						.attr("x", rectWidth/2)
 						.attr("y", 4);
 		
-		
-		canvas.append("text")
+			canvas.append("text")
 		.data(dataset)
 		.attr("x", chartWidth/2 + padding/2 )
-		.attr("y", 0+padding-padding/5)
+		.attr("y", 0+padding)
 		.style("text-anchor", "middle")
-		.text(function(d) {  
-			var retVal;
-			if(currChart==1){
-				retVal= "% Garbage Pickups Collected On Schedule";
-				}
-			else if (currChart ==2){
-				retVal="% Recycling Pickups Collected On Schedule";
-				}
-			else{ retVal = "no title"}
-			return retVal; });
-
-
+		.style("font-weight", "bold")
+		.attr("font-size","18px")
+		.text( "% EMS Incidents Meeting Standards - ALS");
+};
+function generateGraph2(dataset) {
+    
+   //moves the bar graph up or down
+   var graphShift = 25;
+   var canvas2 = d3.select("div#graphs").append("svg")
+							.attr("class", "graphs")
+							.attr("width", width*2)
+							.attr("height", height+10+graphShift)
+							.attr("overflow", "visible");
 	
+	var canvasDetails2 = canvas2.append("svg:svg")
+								.attr("class", "details")
+								.attr("width",width-10)
+								.attr("height", height)
+								.attr("x", width)
+								.attr("y", 0)
+								.attr("overflow", "visible");
+								
+	canvasDetails2.append("image")
+	    .attr("class", "firetruck")
+	    .attr("xlink:href", "images/firetruck_blank.png")
+		.attr("x", -50)
+		.attr("y", 0)
+		.attr("width", 530)
+		.attr("height", 265);
+		
+	canvasDText2 = canvasDetails2.append("text")
+								.attr("x", 262)
+								.attr("y", 80)
+								.attr("font-size","20px")
+								.style("text-anchor", "middle")
+								.style("font-weight", "bold")
+								.text("");
+	canvasDText2Line2 = canvasDetails2.append("text")
+								.attr("x", 262)
+								.attr("y", 100)
+								.attr("font-size","20px")
+								.style("text-anchor", "middle")
+								.style("font-weight", "bold")
+								.text("");
+	canvasDText3Line2 = canvasDetails2.append("text")
+								.attr("x", 262)
+								.attr("y", 160)
+								.attr("font-size","20px")
+								.style("text-anchor", "middle")
+								.style("font-weight", "bold")
+								.text("");
+				
+	//barchart for results of EMSdata1
+	var yScale = d3.scale.linear()
+				.domain([ 0, 100])
+				.range([ 200,0 ]);
+				
+	var xScale = d3.time.scale()
+				.domain([new Date(2013, 0,1), new Date(2013, 6, 31)])
+				.range([0+padding, chartWidth]);
+	
+	var xaxis = d3.svg.axis()
+				.scale(xScale)
+				//.ticks(d3.time.months)
+				.orient("bottom")
+				.tickSize(0)
+				.tickFormat(d3.time.format("%b"));
+
+	var yaxis = d3.svg.axis()
+					.ticks(5)
+					.scale(yScale)
+					.orient("left");
+				
+				//bars in graph				
+				var bars2 = canvas2.selectAll("rect")
+									.data(dataset)
+									.enter()
+										.append("rect")
+										.attr("width", rectWidth)
+										.attr("height", function(d) {return chartY - yScale(d["Result"]) ;})
+										.attr("x", function(d, i) { var Year = d["Year"];
+																	var Month =d["Month"];
+																	var Day = d["Day"];
+															return xScale(new Date( Year, Month, Day ));})
+										.attr("y", function(d) {return yScale(d["Result"])+padding+graphShift;})
+										.attr("fill", function(d,i) { 
+															var color = "#D95541";
+															if (d["Result"]/d["Target"] < .8){
+																color = "#D95541";
+																}
+															else if (d["Result"]/d["Target"] < 1){
+																color = "#F2E96B";
+																}
+															else{
+																color = "#89BD4A";
+																}
+															return color})
+											.on("mouseover", function(d){
+															d3.select(this).transition()
+																.attr("width", rectWidth+10)
+																.attr("height",function(d) {return (chartY - yScale(d["Result"])+10) ;})
+																.attr("x", function(d, i) { var Year = d["Year"];
+																	var Month =d["Month"];
+																	var Day = d["Day"];
+																	return (xScale(new Date( Year, Month, Day ))-5);})
+																.attr("y", function(d) {return (yScale(d["Result"])+padding-10+graphShift);});
+																firetruckText2(d);
+																})
+										.on("mouseout", function(d) {
+														d3.select(this).transition()
+																.attr("width", rectWidth)
+																.attr("height",function(d) {return (chartY - yScale(d["Result"])) ;})
+																.attr("x", function(d, i) { var Year = d["Year"];
+																	var Month =d["Month"];
+																	var Day = d["Day"];
+																return xScale(new Date( Year, Month, Day ));})
+																.attr("y", function(d) {return yScale(d["Result"])+padding+graphShift;});
+																
+																})
+										.on("click", function(d){firetruckText2(d)});			//have labels show up on click in blank firetrucks
+														   
+										
+				function firetruckText2(d){ var month= d["MonthName"];
+															var result= d["Result"];
+															var target= d["Result"] - d["Target"];
+															var retVal2=("In " + month + ", " + result+ "% of incidents");
+															var retVal2Line2=("met standards.");
+															var retVal3Line2=("");
+															if (target < 0){
+																retVal3Line2 = (retVal3Line2 + target + "% below Atlanta's target rate."); }
+															else if (target> 0){
+																retVal3Line2 = (retVal3Line2 + target + "% above Atlanta's target rate!"); }
+															else{
+																retVal3Line2 = (retVal3Line2 + "meeting Atlanta's target rate!");}
+															canvasDText2.transition()
+																			.duration(100)
+																			.text(retVal2);
+															canvasDText2Line2.transition()
+																			.duration(100)
+																			.text(retVal2Line2);
+															canvasDText3Line2.transition()
+																				.duration(100)
+																				.text(retVal3Line2);}
+				function removefiretruckText2(){
+								canvasDText2.transition()
+											.duration(100)
+											.text("");
+							canvasDText2Line2.transition()
+											.duration(100)
+											.text("");
+							canvasDText3Line2.transition()
+												.duration(100)
+												.text("");}
+				
+				//monthly results
+				/*canvas2.selectAll("text")
+						.data(dataset)
+						.enter()	
+							.append("text") 
+							.text(function(d) {return "" + d["Result"];})
+							.attr("x", function(d, i) { var Year = d["Year"];
+														var Month =d["Month"];
+														var Day = d["Day"];
+														return (xScale(new Date( Year, Month, Day )) + rectWidth/2);})
+							.attr("y", function(d) {return  yScale(d["Result"]) + 10 +padding;})
+							.attr("fill", "black")
+							.attr("font-family", "sans-serif")
+							.attr("font-size", "11px")
+							.attr("text-anchor", "middle");*/
+							
+				//Line that shows target results
+				canvas2.data(dataset).append("line")
+						.attr("x1", chartX)
+						.attr("y1", function (d) {return  yScale(d["Target"])+padding+graphShift;})
+						.attr("x2",  chartWidth+(padding/2))
+						.attr("y2", function(d) {return yScale(d["Target"])+padding+graphShift;})
+						.attr("stroke", "black")
+						.attr("stroke-width", 1);
+
+						
+									
+			    canvas2.append("g")
+					.attr("class", "axis")
+					.attr("transform", "translate(30," + (padding+graphShift)+ ")")
+					.call(yaxis);	
+			
+				canvas2.append("g")
+					.attr("class", "axis")
+					.attr("transform", "translate(0,"+ (chartY + padding+graphShift) + ")")
+					.call(xaxis)
+					.selectAll(".tick text")
+						.style("text-anchor", "middle")
+						.attr("x", rectWidth/2)
+						.attr("y", 4);
+		
+			canvas2.append("text")
+		.data(dataset)
+		.attr("x", chartWidth/2 + padding/2 )
+		.attr("y", 0+padding)
+		.style("text-anchor", "middle")
+		.style("font-weight", "bold")
+		.attr("font-size","18px")
+		.text("% EMS Incidents Meeting Standards - BLS");
 };
 
 /*Generate Circle Graphs*/
@@ -334,7 +587,7 @@ d3.tsv("csv/DPWdata3.tsv",  function(error, data) {
         else{
             console.log(data);  
             DPWdata1 = data;
-            generateGraph(DPWdata1);
+            generateGraph1(DPWdata1);
 
         }
     })
@@ -345,7 +598,7 @@ d3.tsv("csv/DPWdata3.tsv",  function(error, data) {
         else{
             console.log(data);  
             DPWdata2 = data;
-            generateGraph(DPWdata2);
+            generateGraph2(DPWdata2);
 
         }
     })
