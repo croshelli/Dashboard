@@ -3,9 +3,10 @@
 <head>
     <meta charset="utf-8">
     <title>Atlanta Civic Dashboard</title>
-    <link rel="stylesheet" type="text/css" href="dashboard.css">
+    <link rel="stylesheet" type="text/css" href="public_works.css">
     <script src="js/d3.v3.min.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/public_works.js"></script>
+    <script type="text/javascript" src="js/dashboard.js"></script>
+	
 </head>
 
 <body>
@@ -23,35 +24,81 @@
 			<li><a href="public_works.html">Public Works</a></li>			
 		</ul>
 	</div>
-	<section>
 	
-	<p>
-		<h1>Public Works</h1>
-		Mission services maintain and improve the city through strong community partnerships, clear policies, and strong goals leading to increased public safety, health, and wellness for the citizens of Atlanta.
+	<div id="animatedRecycle"></div>
+	<div id="content">
 		
-		<h3>Cartlanta</h3>
-		The City of Atlanta has started recycling citywide! Or residential solid waste customers not have a 96-gallon recycling cart allowing for more recyclables to be collected. The citywide distribution of carts will decrease public waste by 90% by the year 2020.
-
-		<h3>Office of Solid Waste Services</h3>
-		Responsible for the collection and disposal management of solid waste within the City of Atlanta. Reduces waste and provides recycling, solid waste management and study; education and enforcement; street sweeping and cleaning, dead animal removal, enforcing the Keep Atlanta Beautiful program, and assisting with city-wide operations.
-
-	</p>
-	</section>
-<div id="graphs"></div>
-	<div>
-	<form>
-			<label><input type="radio"  name="dataset" title="January" id="9072" value="jan" checked> January</label>
-			<label><input type="radio"  name="dataset" title="February" id="7302" value="feb"> February</label>
-			<label><input type="radio"  name="dataset" title="March" id="9799" value="march"> March</label>
-			<label><input type="radio"  name="dataset" title="April" id="9987" value="april" > April</label>
-			<label><input type="radio"  name="dataset" title="May" id="11101" value="may"> May</label>
-			<label><input type="radio"  name="dataset" title="June" id="10087" value="june"> June</label>
-			<label><input type="radio"  name="dataset" title="July" id="9889" value="july"> July</label>
-	</form>
+	<h1>Public Works</h1>
+	
+	<div class="leftColumn">
+		
+	<div class="box firstRow">
+		<h4 align="center">What Are Public Works?</h4>
+		<ul>
+			<li>Public works consists of a wide variety of services offered in the city which focus on maintenance, development, and management projects for the city.</li>
+			<li>Some services that are considered part of public works are: solid waste services, recycling services, transportation services, and construction services.</li>
+		</ul>		 
 	</div>
 	
+	<div class="box secondRow">
+		<h4 align="center">Transportation</h4>
+		<ul>
+			<li>Atlanta's Office of Transportation looks after and maintains the city's street network.</li>
+			<li>Maintenance of the street network is done by keeping track of and fixing traffic signals, street lights, street signs, street maintenance, and on-street parking.</li>
+		</ul> 
+	</div>
+		
+	</div>
+	
+	<div class="rightColumn">
+	<div class="box firstRow">
+		<h4 align="center">Solid Waste and Recycling Services</h4>
+		<ul>
+			<li>Solid waste (garbage) services handle taking people's garbage and getting rid or disposing of it.</li>
+			<li>Recycling services focus on collecting people's recycled items and actually processing them so they can be reused.</li>
+			<li>You can <a href="http://www.atlantaga.gov/index.aspx?page=493">recycle</a> most items made out of paper, glass, cans, plastic, and cardboard.</li>
+		</ul>	
+	</div>
+	<div class="box secondRow">
+		<h4 align="center">Construction Services</h4>
+		<ul>
+			<li>The Department of Public Works is responsible for keeping sidewalks and streets in good conditions.</li>
+			<li>You can <a href="http://www.atlantaga.gov/index.aspx?page=648">report</a> streets or sidewalks that are in poor condition and can be dangerous to use to Atlanta's Department of Public Works.</li>
+		</ul> 	
+	</div>
+	</div>
+	
+
+	<div class="graphBox leftColumn thirdRow">
+		<h4 align="center">Public Works Data</h4>
+		<ul>
+			<li>The graph to the right shows the average EMS response time, or how quickly it took for EMS to respond to a call.</li>
+			<li>Click on a button to see the data for a different month.</li>
+			<li>If the graph is red it means the response time was too slow, so it would take longer for the workers in EMS to help a person. Yellow means it was close to the target time. Green means the response was quick.</li>
+			<li>The graphs below show the number of times EMS provided BLS and ALS that met Georgia's EMS standards.</li>
+		</ul> 	
+	</div>
+	
+	</div> <!--closes the id="content"-->
+	<div id="pie">
+		<div id="form">
+		<ul>
+				<label><input type="radio"  name="dataset" title="January" id="9072" value="jan" checked> January</label>
+				<label><input type="radio"  name="dataset" title="February" id="7302" value="feb"> February</label>
+				<label><input type="radio"  name="dataset" title="March" id="9799" value="march"> March</label>
+				<label><input type="radio"  name="dataset" title="April" id="9987" value="april" checked> April</label>
+				<label><input type="radio"  name="dataset" title="May" id="11101" value="may"> May</label>
+				<label><input type="radio"  name="dataset" title="June" id="10087" value="june"> June</label>
+				<label><input type="radio"  name="dataset" title="July" id="9889" value="july"> July</label>
+		</ul>
+		</div>
+	</div>
+
+		
+	
+
+	<div id="graphs"></div>
+	
+
 </body>
 </html>
-
-
-
