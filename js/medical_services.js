@@ -121,6 +121,26 @@ function generateGraph1(dataset) {
 																color = "green";
 																}
 															return color})
+											.on("mouseover", function(d){
+															d3.select(this).transition()
+																.attr("width", rectWidth+10)
+																.attr("height",function(d) {return (chartY - yScale(d["Result"])+10) ;})
+																.attr("x", function(d, i) { var Year = d["Year"];
+																	var Month =d["Month"];
+																	var Day = d["Day"];
+																	return (xScale(new Date( Year, Month, Day ))-5);})
+																.attr("y", function(d) {return (yScale(d["Result"])+padding-10);});
+																})
+										.on("mouseout", function(d) {
+														d3.select(this).transition()
+																.attr("width", rectWidth)
+																.attr("height",function(d) {return (chartY - yScale(d["Result"])) ;})
+																.attr("x", function(d, i) { var Year = d["Year"];
+																	var Month =d["Month"];
+																	var Day = d["Day"];
+																return xScale(new Date( Year, Month, Day ));})
+																.attr("y", function(d) {return yScale(d["Result"])+padding;});
+																})
 											.on("click", function(d){				//have labels show up on click in blank ambulances
 														    var month= d["MonthName"];
 															var result= d["Result"];
@@ -227,7 +247,7 @@ function generateGraph2(dataset) {
 	canvasDText2 = canvasDetails2.append("text")
 								.attr("x", 100)
 								.attr("y", 100)
-								.attr("width", 100)
+								.attr("width",50)
 								.attr("height", 200)
 								.style("text-anchor", "middle")
 								.text(  "EMS Response Time" );
@@ -277,6 +297,27 @@ function generateGraph2(dataset) {
 																color = "green";
 																}
 															return color})
+											.on("mouseover", function(d){
+															d3.select(this).transition()
+																.attr("width", rectWidth+10)
+																.attr("height",function(d) {return (chartY - yScale(d["Result"])+10) ;})
+																.attr("x", function(d, i) { var Year = d["Year"];
+																	var Month =d["Month"];
+																	var Day = d["Day"];
+																	return (xScale(new Date( Year, Month, Day ))-5);})
+																.attr("y", function(d) {return (yScale(d["Result"])+padding-10);});
+																})
+										.on("mouseout", function(d) {
+														d3.select(this).transition()
+																.attr("width", rectWidth)
+																.attr("height",function(d) {return (chartY - yScale(d["Result"])) ;})
+																.attr("x", function(d, i) { var Year = d["Year"];
+																	var Month =d["Month"];
+																	var Day = d["Day"];
+																return xScale(new Date( Year, Month, Day ));})
+																.attr("y", function(d) {return yScale(d["Result"])+padding;});
+																})
+															
 											.on("click", function(d){				//have labels show up on click in blank ambulances
 														    var month2= d["MonthName"];
 															var result2= d["Result"];
@@ -316,21 +357,7 @@ function generateGraph2(dataset) {
 						.attr("x2",  chartWidth+(padding/2))
 						.attr("y2", function(d) {return yScale(d["Target"])+padding;})
 						.attr("stroke", "black")
-						.attr("stroke-width", 1)
-						    .on("mouseover", function(d) {      
-								div.transition()        
-									.duration(400)   
-									.style("opacity", .9);      
-									var retVal = "Target Rate of: " + d["Target"];
-								div .html(retVal)  
-									.style("left", (d3.event.pageX) + "px")     
-									.style("top", (d3.event.pageY - 28) + "px");    
-								})                  
-							.on("mouseout", function(d) {       
-								div.transition()        
-									.duration(500)      
-									.style("opacity", 0);   
-							});
+						.attr("stroke-width", 1);
 
 						
 									
