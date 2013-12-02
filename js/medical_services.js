@@ -15,9 +15,9 @@ start();
 
 function generateAnimations() {
 	svg = d3.select("div#movingAmbulance")
-	  	.append("svg")
-		.attr("width", 1100)
-		.attr("height", 750);
+		  	.append("svg")
+			.attr("width", 1100)
+			.attr("height", 750);
 	svg.append("image")
 		.attr("xlink:href", "images/road.png")
 		.attr("x", 0)
@@ -35,8 +35,8 @@ function generateAnimations() {
 		.on("mouseover", function(d) {
 			d3.select(this).transition()
 							.attr("x", 20)
-							.duration(2000)
-							.delay(300);
+							.duration(1000)
+							.delay(100);
 		});	
 		
 		
