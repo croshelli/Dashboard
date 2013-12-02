@@ -37,10 +37,7 @@ function generateAnimations() {
 							.attr("x", 20)
 							.duration(1000)
 							.delay(100);
-		});	
-		
-		
-	
+		});		
 }
 
 function generateGraph(dataset) {
@@ -184,7 +181,7 @@ function generateGraph(dataset) {
 						.attr("x", rectWidth/2)
 						.attr("y", 4);
 		
-			canvas.append("text")
+		canvas.append("text")
 		.data(dataset)
 		.attr("x", chartWidth/2 + padding/2 )
 		.attr("y", 0+padding)
@@ -333,7 +330,7 @@ function start(){
             EMSdata3 = data;
 			
 
-			generatePieCharts(EMSdata3);
+			//generatePieCharts(EMSdata3);
 			
 	
 			
