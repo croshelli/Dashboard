@@ -109,8 +109,8 @@ p {
 }
 
 #graphs {
-	margin: 0px 70px 0px;
-	float: right;
+	margin-right: 50px;
+	float: left;
 	top: 50px;
 }
 
