@@ -15,6 +15,7 @@ var chartY = 200;
 var chartWidth = (7*50);
 var padding = 30;
 var rectWidth = 30;
+var formatting = d3.format(".2f");
 
 start();
 
@@ -40,26 +41,32 @@ function generateGraph1(dataset) {
 	canvasDetails.append("image")
 	    .attr("class", "recyclebin")
 	    .attr("xlink:href", "images/recyclebin.png")
-		.attr("x", -150)
-		.attr("y", 0)
-		.attr("width", 600)
-		.attr("height", 300);
+		.attr("x", -130)
+		.attr("y", 10)
+		.attr("width", 540)
+		.attr("height", 270);
 		
 	canvasDText = canvasDetails.append("text")
-								.attr("x", 232)
-								.attr("y", 140)
+								.attr("x", 142)
+								.attr("y", 85)
 								.attr("font-size","20px")
 								.style("text-anchor", "middle")
 								.style("font-weight", "bold")
 								.text("");
 	canvasDText2Line = canvasDetails.append("text")
-								.attr("x", 232)
-								.attr("y", 170)
+								.attr("x", 142)
+								.attr("y", 105)
 								.attr("font-size","20px")
 								.style("text-anchor", "middle")
 								.style("font-weight", "bold")
 								.text("");
-
+	canvasDText3Line = canvasDetails.append("text")
+								.attr("x", 142)
+								.attr("y", 135)
+								.attr("font-size","20px")
+								.style("text-anchor", "middle")
+								.style("font-weight", "bold")
+								.text("");
 				
 	//barchart for results of EMSdata1
 	var yScale = d3.scale.linear()
@@ -133,20 +140,25 @@ function generateGraph1(dataset) {
 				function recyclebinText(d){ var month= d["MonthName"];
 															var result= d["Result"];
 															var target= d["Result"] - d["Target"];
-															var retVal=("In " + month + ", " + result+ "% of incidents met standards.");
-															var retVal2Line=("");
+															target = formatting(target);
+															var retVal=("In " + month + ", " + result+ "% of incidents");
+															var retVal2Line=("met standards.");
+															var retVal3Line=("");
 															if (target < 0){
-																retVal2Line = (retVal2Line + target + "% below Atlanta's target rate."); }
+																retVal3Line = (retVal3Line + target + "% below Atlanta's target rate."); }
 															else if (target> 0){
-																retVal2Line = (retVal2Line + target + "% above Atlanta's target rate!"); }
+																retVal3Line = (retVal3Line + target + "% above Atlanta's target rate!"); }
 															else{
-																retVal2Line = (retVal2Line + "meeting Atlanta's target rate!");}
+																retVal3Line = (retVal3Line + "meeting Atlanta's target rate!");}
 															canvasDText.transition()
 																			.duration(100)
 																			.text(retVal);
 															canvasDText2Line.transition()
 																			.duration(100)
-																			.text(retVal2Line);}
+																			.text(retVal2Line);
+															canvasDText3Line.transition()
+																				.duration(100)
+																				.text(retVal3Line);}
 				function removerecyclebinText(){
 								canvasDText.transition()
 											.duration(100)
@@ -246,26 +258,32 @@ function generateGraph2(dataset) {
 	canvasDetails2.append("image")
 	    .attr("class", "recyclebin")
 	    .attr("xlink:href", "images/recyclebin.png")
-		.attr("x", -50)
-		.attr("y", 0)
-		.attr("width", 530)
-		.attr("height", 265);
+		.attr("x", -130)
+		.attr("y", 10)
+		.attr("width", 540)
+		.attr("height", 270);
 		
 	canvasDText2 = canvasDetails2.append("text")
-								.attr("x", 232)
-								.attr("y", 140)
+								.attr("x", 142)
+								.attr("y", 85)
 								.attr("font-size","20px")
 								.style("text-anchor", "middle")
 								.style("font-weight", "bold")
 								.text("");
 	canvasDText2Line2 = canvasDetails2.append("text")
-								.attr("x", 232)
-								.attr("y", 170)
+								.attr("x", 142)
+								.attr("y", 105)
 								.attr("font-size","20px")
 								.style("text-anchor", "middle")
 								.style("font-weight", "bold")
 								.text("");
-
+	canvasDText3Line2 = canvasDetails2.append("text")
+								.attr("x", 142)
+								.attr("y", 135)
+								.attr("font-size","20px")
+								.style("text-anchor", "middle")
+								.style("font-weight", "bold")
+								.text("");
 				
 	//barchart for results of EMSdata1
 	var yScale = d3.scale.linear()
@@ -340,21 +358,25 @@ function generateGraph2(dataset) {
 				function recyclebinText2(d){ var month= d["MonthName"];
 															var result= d["Result"];
 															var target= d["Result"] - d["Target"];
-															var retVal2=("In " + month + ", " + result+ "% of incidents met standards.");
-															var retVal2Line2=("");
+															target = formatting(target);
+															var retVal2=("In " + month + ", " + result+ "% of incidents");
+															var retVal2Line2=("met standards.");
+															var retVal3Line2=("");
 															if (target < 0){
-																retVal2Line2 = (retVal2Line2 + target + "% below Atlanta's target rate."); }
+																retVal3Line2 = (retVal3Line2 + target + "% below Atlanta's target rate."); }
 															else if (target> 0){
-																retVal2Line2 = (retVal2Line2 + target + "% above Atlanta's target rate!"); }
+																retVal3Line2 = (retVal3Line2 + target + "% above Atlanta's target rate!"); }
 															else{
-																retVal2Line2 = (retVal2Line2 + "meeting Atlanta's target rate!");}
+																retVal3Line2 = (retVal3Line2 + "meeting Atlanta's target rate!");}
 															canvasDText2.transition()
 																			.duration(100)
 																			.text(retVal2);
 															canvasDText2Line2.transition()
 																			.duration(100)
 																			.text(retVal2Line2);
-															}
+															canvasDText3Line2.transition()
+																				.duration(100)
+																				.text(retVal3Line2);}
 				function removerecyclebinText2(){
 								canvasDText2.transition()
 											.duration(100)
