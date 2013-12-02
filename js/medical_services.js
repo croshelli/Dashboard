@@ -63,18 +63,32 @@ function generateGraph1(dataset) {
 	canvasDetails.append("image")
 	    .attr("class", "ambulance")
 	    .attr("xlink:href", "images/ambulance_blank.png")
-		.attr("x", 0)
-		.attr("y", 20)
-		.attr("width", 450)
-		.attr("height", 225);
+		.attr("x", -50)
+		.attr("y", 0)
+		.attr("width", 530)
+		.attr("height", 265);
 		
 	canvasDText = canvasDetails.append("text")
-								.attr("x", 100)
+								.attr("x", 262)
 								.attr("y", 100)
-								.attr("width", 100)
-								.attr("height", 200)
+								.attr("font-size","20px")
 								.style("text-anchor", "middle")
-								.text(  "EMS Response Time" );
+								.style("font-weight", "bold")
+								.text("");
+	canvasDText2Line = canvasDetails.append("text")
+								.attr("x", 262)
+								.attr("y", 120)
+								.attr("font-size","20px")
+								.style("text-anchor", "middle")
+								.style("font-weight", "bold")
+								.text("");
+	canvasDText3Line = canvasDetails.append("text")
+								.attr("x", 262)
+								.attr("y", 140)
+								.attr("font-size","20px")
+								.style("text-anchor", "middle")
+								.style("font-weight", "bold")
+								.text("");
 				
 	//barchart for results of EMSdata1
 	var yScale = d3.scale.linear()
@@ -107,6 +121,7 @@ function generateGraph1(dataset) {
 										.attr("x", function(d, i) { var Year = d["Year"];
 																	var Month =d["Month"];
 																	var Day = d["Day"];
+																	console.log(d["Result"]);
 															return xScale(new Date( Year, Month, Day ));})
 										.attr("y", function(d) {return yScale(d["Result"])+padding;})
 										.attr("fill", function(d,i) { 
@@ -145,16 +160,25 @@ function generateGraph1(dataset) {
 														    var month= d["MonthName"];
 															var result= d["Result"];
 															var target= d["Result"] - d["Target"];
-															var retVal=("In " + month + ", " + result+ "% of incidents met standards. ");
+															var retVal=("In " + month + ", " + result+ "% of incidents");
+															var retVal2Line=("met standards.");
+															var retVal3Line=("");
 															if (target < 0){
-																retVal = (retVal + target + "% below Atlanta's target rate."); }
+																retVal3Line = (retVal3Line + target + "% below Atlanta's target rate."); }
 															else if (target> 0){
-																retVal = (retVal + target + "% above Atlanta's target rate!"); }
+																retVal3Line = (retVal3Line + target + "% above Atlanta's target rate!"); }
 															else{
-																retVal = (retVal + "meeting Atlanta's target rate!");}
+																retVal3Line = (retVal3Line + "meeting Atlanta's target rate!");}
 															canvasDText.transition()
-																			.duration(400)
-																			.text(retVal);});
+																			.duration(100)
+																			.text(retVal);
+															canvasDText.transition()
+																			.duration(100)
+																			.text(retVal2Line);
+															canvasDText3Line.transition()
+																				.duration(100)
+																				.text(retVal3Line);});
+																
 										
 						
 				//monthly results
@@ -162,7 +186,9 @@ function generateGraph1(dataset) {
 						.data(dataset)
 						.enter()	
 							.append("text") 
-							.text(function(d) {return "" + d["Result"];})
+							.text(function(d) {
+								console.log(d["Result"]);
+								return "" + d["Result"];})
 							.attr("x", function(d, i) { var Year = d["Year"];
 														var Month =d["Month"];
 														var Day = d["Day"];
