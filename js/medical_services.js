@@ -14,7 +14,7 @@ var rectWidth = 30;
 start();
 
 function generateAnimations() {
-	svg = d3.select("div#movingAmbulance")
+	svg = d3.select("div#animatedAmbulance")
 		  	.append("svg")
 			.attr("width", 1100)
 			.attr("height", 750);
@@ -24,7 +24,11 @@ function generateAnimations() {
 		.attr("y", 352)
 		.attr("width", 1100)
 		.attr("height", 98);
-		
+	
+	var xPos = 900;
+	var yPos = 360;
+	var imgWidth = 140;
+	var imgHeight = 70;	
 	svg.append("image")
 	    .attr("id", "movingAmbulance")
 	    .attr("xlink:href", "home_images/ambulance.png")
@@ -38,9 +42,6 @@ function generateAnimations() {
 							.duration(1000)
 							.delay(100);
 		});	
-		
-		
-	
 }
  
 function generateGraph(dataset) {
@@ -61,8 +62,8 @@ function generateGraph(dataset) {
 								.attr("overflow", "visible");
 								
 	canvasDetails.append("image")
-	    .attr("id", "movingAmbulance")
-	    .attr("xlink:href", "home_images/ambulance.png")
+	    .attr("class", "ambulance")
+	    .attr("xlink:href", "images/ambulance_blank.png")
 		.attr("x", 0)
 		.attr("y", 20)
 		.attr("width", 450)
@@ -218,17 +219,17 @@ function generateGraph(dataset) {
 /*Generate Circle Graphs*/
 
 function generatePieCharts(data){
-	var width = 1010,
-    height = 550,
+	var width = 400,
+    height = 800,
     radius = Math.min(width, height) / 2;
 	
     
-	var svg = d3.select("div#graphs").append("svg")
+	var svg = d3.select("div#pie").append("svg")
 					.attr("class", "graphs") 					//create svg element
 					.attr("width", width+100)
-					.attr("height", height+200)
+					.attr("height", 700)
 					.attr("overflow", "visible")
-				.append("g")    		//make a group to hold our pie chart
+					.append("g")    		//make a group to hold our pie chart
 					.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 	
 	var pie = d3.layout.pie()
@@ -236,7 +237,7 @@ function generatePieCharts(data){
     .sort(null);
 
 	var arc = d3.svg.arc()
-		.innerRadius(radius - 120)
+		.innerRadius(radius - 80)
 		.outerRadius(radius );
 					
 	var titleText = svg.append("text")
