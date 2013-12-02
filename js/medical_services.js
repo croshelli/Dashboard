@@ -145,6 +145,7 @@ function generateGraph1(dataset) {
 																	var Day = d["Day"];
 																	return (xScale(new Date( Year, Month, Day ))-5);})
 																.attr("y", function(d) {return (yScale(d["Result"])+padding-10);});
+																ambulanceText(d);
 																})
 										.on("mouseout", function(d) {
 														d3.select(this).transition()
@@ -156,8 +157,9 @@ function generateGraph1(dataset) {
 																return xScale(new Date( Year, Month, Day ));})
 																.attr("y", function(d) {return yScale(d["Result"])+padding;});
 																})
-											.on("click", function(d){				//have labels show up on click in blank ambulances
-														    var month= d["MonthName"];
+											.on("click", function(d){ambulanceText(d)});
+											
+				function ambulanceText(d){ var month= d["MonthName"];
 															var result= d["Result"];
 															var target= d["Result"] - d["Target"];
 															var retVal=("In " + month + ", " + result+ "% of incidents");
@@ -177,8 +179,17 @@ function generateGraph1(dataset) {
 																			.text(retVal2Line);
 															canvasDText3Line.transition()
 																				.duration(100)
-																				.text(retVal3Line);});
-																
+																				.text(retVal3Line);}
+				function removeambulanceText(){
+								canvasDText.transition()
+											.duration(100)
+											.text("");
+							canvasDText2Line2.transition()
+											.duration(100)
+											.text("");
+							canvasDText3Line2.transition()
+												.duration(100)
+												.text("");}												
 										
 						
 				//monthly results
@@ -346,6 +357,7 @@ function generateGraph2(dataset) {
 																	var Day = d["Day"];
 																	return (xScale(new Date( Year, Month, Day ))-5);})
 																.attr("y", function(d) {return (yScale(d["Result"])+padding-10);});
+																ambulanceText2(d);
 																})
 										.on("mouseout", function(d) {
 														d3.select(this).transition()
@@ -356,10 +368,12 @@ function generateGraph2(dataset) {
 																	var Day = d["Day"];
 																return xScale(new Date( Year, Month, Day ));})
 																.attr("y", function(d) {return yScale(d["Result"])+padding;});
+																
 																})
-															
-											.on("click", function(d){				//have labels show up on click in blank ambulances
-														    var month= d["MonthName"];
+										.on("click", function(d){ambulanceText2(d)});			//have labels show up on click in blank ambulances
+														   
+										
+				function ambulanceText2(d){ var month= d["MonthName"];
 															var result= d["Result"];
 															var target= d["Result"] - d["Target"];
 															var retVal2=("In " + month + ", " + result+ "% of incidents");
@@ -379,9 +393,18 @@ function generateGraph2(dataset) {
 																			.text(retVal2Line2);
 															canvasDText3Line2.transition()
 																				.duration(100)
-																				.text(retVal3Line2);});
-										
-						
+																				.text(retVal3Line2);}
+				function removeambulanceText2(){
+								canvasDText2.transition()
+											.duration(100)
+											.text("");
+							canvasDText2Line2.transition()
+											.duration(100)
+											.text("");
+							canvasDText3Line2.transition()
+												.duration(100)
+												.text("");}
+				
 				//monthly results
 				canvas2.selectAll("text")
 						.data(dataset)
