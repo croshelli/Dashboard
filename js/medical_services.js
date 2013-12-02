@@ -225,12 +225,12 @@ function generatePieCharts(data){
 	
     
 	var svg = d3.select("div#pie").append("svg")
-					.attr("class", "graphs") 					//create svg element
-					.attr("width", width+100)
+					//create svg element
+					.attr("width", width)
 					.attr("height", 700)
 					.attr("overflow", "visible")
 					.append("g")    		//make a group to hold our pie chart
-					.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+					.attr("transform", "translate(" + radius + "," + radius + ")");
 	
 	var pie = d3.layout.pie()
     .value(function(d) { return d.april; })
@@ -238,7 +238,7 @@ function generatePieCharts(data){
 
 	var arc = d3.svg.arc()
 		.innerRadius(radius - 80)
-		.outerRadius(radius );
+		.outerRadius(radius);
 					
 	var titleText = svg.append("text")
 		.attr("x", 0)
