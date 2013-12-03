@@ -2,7 +2,7 @@
 
 
 
-var EMSdata1;
+var DPWdata1,DPWdata2,DPWdata3;
 
 var svg;
 var currChart=0;
@@ -442,25 +442,25 @@ function generateGraph2(dataset) {
 /*Generate Circle Graphs*/
 
 function generatePieCharts(data){
-	var width = 1010,
-    height = 550,
+	var width = 400,
+    height = 800,
     radius = Math.min(width, height) / 2;
 	
     
-	var svg = d3.select("div#graphs").append("svg")
-					.attr("class", "graphs") 					//create svg element
-					.attr("width", width+100)
-					.attr("height", height+200)
+	var svg = d3.select("div#pie").append("svg")
+					//create svg element
+					.attr("width", width)
+					.attr("height", 700)
 					.attr("overflow", "visible")
 				.append("g")    		//make a group to hold our pie chart
-					.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+					.attr("transform", "translate(" + radius  + "," + radius + ")");
 	
 	var pie = d3.layout.pie()
     .value(function(d) { return d.jan; })
     .sort(null);
 
 	var arc = d3.svg.arc()
-		.innerRadius(radius - 110)
+		.innerRadius(radius - 80)
 		.outerRadius(radius );
 					
 	var titleText = svg.append("text")
