@@ -288,7 +288,7 @@ function generateGraph1(dataset) {
 		.style("text-anchor", "middle")
 		.style("font-weight", "bold")
 		.attr("font-size","18px")
-		.text( "% EMS Incidents Meeting Standards - ALS");
+		.text( "% Garbage Pickups Collected On Schedule");
 };
 function generateGraph2(dataset) {
     
@@ -489,7 +489,7 @@ function generateGraph2(dataset) {
 		.style("text-anchor", "middle")
 		.style("font-weight", "bold")
 		.attr("font-size","18px")
-		.text("% EMS Incidents Meeting Standards - BLS");
+		.text("% Recycling Pickups Collected on Schedule");
 };
 
 /*Generate Circle Graphs*/
