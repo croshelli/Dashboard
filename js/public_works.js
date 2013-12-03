@@ -1,7 +1,3 @@
-
-
-
-
 var DPWdata1,DPWdata2,DPWdata3;
 
 var svg;
@@ -18,6 +14,58 @@ var rectWidth = 30;
 var formatting = d3.format(".2f");
 
 start();
+
+function generateAnimations() {
+	svg = d3.select("div#animatedIcons")
+		  	.append("svg")
+			.attr("width", 1100)
+			.attr("height", 750);
+	svg.append("image")
+		.attr("xlink:href", "images/street.png")
+		.attr("x", 0)
+		.attr("y", 352)
+		.attr("width", 1100)
+		.attr("height", 98);
+	
+	var xPos = 900;
+	var yPos = 360;
+	var imgWidth = 94;
+	var imgHeight = 83;	
+	var isTiltedRight = false;
+	svg.append("image")
+	    .attr("id", "animatedTrash")
+	    .attr("xlink:href", "images/trash.png")
+		.attr("x", 505)
+		.attr("y", 160)
+		.attr("width", 94)
+		.attr("height", 82)
+		.on("mouseover", function(d) {	
+			if (!isTiltedRight) {
+				isTiltedRight = true;
+				d3.select(this)
+					.transition()
+					.duration(1000)
+					.delay(200)
+					.attr("transform", "translate(0 0) rotate(15 557 201)");
+					
+					
+			}	
+			else {
+				isTiltedRight = false;
+				d3.select(this)
+					.transition()
+					.duration(1000)
+					.delay(200)					
+					.attr("transform", "translate(0 0) rotate(-15 557 201)");	
+			}
+			
+		})
+		.on("mouseout", function(d) {
+
+			d3.select(this)
+				.attr("transform", "rotate(0 557 201)");
+		});
+}
 
 function generateGraph1(dataset) {
    
@@ -575,13 +623,8 @@ d3.tsv("csv/DPWdata3.tsv",  function(error, data) {
         else{
             console.log(data);  
             DPWdata3 = data;
-			
-
+			generateAnimations()
 			generatePieCharts(DPWdata3);
-			
-	
-			
-
         }
     })
     d3.csv("csv/DPWdata1.csv", function(error, data) {
