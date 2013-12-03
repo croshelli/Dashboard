@@ -51,19 +51,12 @@ function displayImage(id, file, xPos, yPos, imgWidth, imgHeight, link) {
 				.on("mouseover", function(d) {
 					var x = -xPos - imgWidth / 2;
 					var y = -yPos - imgHeight / 2;
-					var xCenter = xPos + imgWidth / 2;
-					var yCenter = yPos + imgHeight / 2;
-					var xScaled = x * 1.2;
-					var yScaled = y * 1.2;
-					var xNew = xCenter - imgWidth * 1.2;
-					var yNew = yCenter - imgHeight * 1.2; 
 					
 					d3.select(this)
 						//.attr("transform", "translate(" + x + "," + y + "), scale(1.2, 1.2), translate(" + (xScaled + imgWidth * 1.2 / 2 + xNew) + "," + (yScaled + imgHeight * 1.2 / 2 + yNew) + ")");
 						.attr("transform", "translate(" + x + "," + y + "), scale(1.5, 1.5), translate(" + -(x - x / 1.5) + "," + -(y - y / 1.5) + ")");
 				})
 				.on("mouseout", function(d) {
-					d3.select(this)
 					var x = -xPos - imgWidth *1.5 / 2;
 					var y = -yPos - imgHeight * 1.5/ 2; 
 					d3.select(this)
