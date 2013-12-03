@@ -236,18 +236,12 @@ function generateGraph2(dataset) {
 		
 	canvasDText2 = canvasDetails2.append("text")
 								.attr("x", 252)
-								.attr("y", 160)
+								.attr("y", 180)
 								.attr("font-size","20px")
 								.style("text-anchor", "middle")
 								.style("font-weight", "bold")
 								.text("");
-	canvasDText2Line2 = canvasDetails2.append("text")
-								.attr("x", 252)
-								.attr("y", 190)
-								.attr("font-size","20px")
-								.style("text-anchor", "middle")
-								.style("font-weight", "bold")
-								.text("");
+	
 	
 				
 	//barchart for results of EMSdata1
@@ -285,10 +279,10 @@ function generateGraph2(dataset) {
 										.attr("y", function(d) {return yScale(d["Result"])+padding+graphShift;})
 										.attr("fill", function(d,i) { 
 															var color = "#D95541";
-															if (d["Result"]/d["Target"] < .8){
+															if (d["Result"] >149){
 																color = "#D95541";
 																}
-															else if (d["Result"]/d["Target"] < 1){
+															else if (d["Result"] > 99){
 																color = "#F2E96B";
 																}
 															else{
@@ -324,19 +318,9 @@ function generateGraph2(dataset) {
 															var result= d["Result"];
 															var target= d["Result"] - d["Target"];
 															var retVal2=("In " + month + ", there were " + result+ " fire events in Atlanta.");
-															var retVal2Line2=("");
-															if (target < 0){
-																retVal2Line2 = (retVal2Line2 + target + "% below Atlanta's target rate."); }
-															else if (target> 0){
-																retVal2Line2 = (retVal2Line2 + target + "% above Atlanta's target rate!"); }
-															else{
-																retVal3Line2 = (retVal2Line2 + "meeting Atlanta's target rate!");}
 															canvasDText2.transition()
 																			.duration(100)
 																			.text(retVal2);
-															canvasDText2Line2.transition()
-																			.duration(100)
-																			.text(retVal2Line2);
 															}
 				
 				
