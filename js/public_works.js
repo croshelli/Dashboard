@@ -449,6 +449,7 @@ function generatePieCharts(data){
     
 	var svg = d3.select("div#pie").append("svg")
 					//create svg element
+					.attr("class", "pie")
 					.attr("width", width)
 					.attr("height", 700)
 					.attr("overflow", "visible")
