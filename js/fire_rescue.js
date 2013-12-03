@@ -11,8 +11,50 @@ var chartY = 200;
 var chartWidth = (7*60);
 var padding = 30;
 var rectWidth = 30;
+var hasReachedTop = true;
 start();
 
+function generateAnimations() {
+	svg = d3.select("div#animatedFirefighter")
+		  	.append("svg")
+			.attr("width", 1100)
+			.attr("height", 750);
+	svg.append("image")
+		.attr("xlink:href", "images/ladder.png")
+		.attr("x", 510)
+		.attr("y", 160)
+		.attr("width", 80)
+		.attr("height", 500);
+	
+	var xPos = 900;
+	var yPos = 360;
+	var imgWidth = 140;
+	var imgHeight = 70;	
+	svg.append("image")
+	    .attr("id", "animatedFirefighter")
+	    .attr("xlink:href", "images/firefighter.png")
+		.attr("x", 510)
+		.attr("y", 160)
+		.attr("width", 78)
+		.attr("height", 112)
+		.on("mouseover", function(d) {
+			if (hasReachedTop){
+				hasReachedTop = false;
+				d3.select(this).transition()
+								.attr("y", 548)
+								.duration(3000)
+								.delay(100);				
+			}
+			else {
+				hasReachedTop = true;
+				d3.select(this).transition()
+								.attr("y", 160)
+								.duration(3000)
+								.delay(100);				
+			}
+
+		});	
+}
 
 function generateGraph1(dataset) {
    
@@ -488,13 +530,8 @@ function start(){
         else{
             console.log(data);  
             Firedata2 = data;
-			
-
 			generatePieCharts(Firedata2);
-			
-	
-			
-
+			generateAnimations()
         }
     })
 	d3.csv("csv/Firedata1.csv", function(error, data) {
