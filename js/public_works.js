@@ -12,6 +12,7 @@ var chartWidth = (7*50);
 var padding = 30;
 var rectWidth = 30;
 var formatting = d3.format(".2f");
+var isTiltedRight = false;
 
 start();
 
@@ -27,44 +28,48 @@ function generateAnimations() {
 		.attr("width", 1100)
 		.attr("height", 98);
 	
-	var xPos = 900;
-	var yPos = 360;
-	var imgWidth = 94;
-	var imgHeight = 83;	
-	var isTiltedRight = false;
-	svg.append("image")
-	    .attr("id", "animatedTrash")
-	    .attr("xlink:href", "images/trash.png")
-		.attr("x", 505)
-		.attr("y", 160)
-		.attr("width", 94)
-		.attr("height", 82)
-		.on("mouseover", function(d) {	
-			if (!isTiltedRight) {
-				isTiltedRight = true;
-				d3.select(this)
-					.transition()
-					.duration(1000)
-					.delay(200)
-					.attr("transform", "translate(0 0) rotate(15 557 201)");
-					
-					
-			}	
-			else {
-				isTiltedRight = false;
-				d3.select(this)
-					.transition()
-					.duration(1000)
-					.delay(200)					
-					.attr("transform", "translate(0 0) rotate(-15 557 201)");	
-			}
-			
-		})
-		.on("mouseout", function(d) {
+	displayImage("animatedRecycle", "home_images/recycle.png", 520, 120, 60, 53);
+	displayImage("animatedTrash", "images/trash.png", 505, 220, 94, 82);
+	displayImage("animatedStop", "images/stop_sign.png", 500, 480, 100, 99);
+	displayImage("animatedTrafficLight", "images/traffic_light.png", 524, 620, 52, 114);
+}
 
-			d3.select(this)
-				.attr("transform", "rotate(0 557 201)");
-		});
+function displayImage(id, file, xPos, yPos, imgWidth, imgHeight) {
+	var xCenter = xPos + imgWidth / 2;
+					var yCenter = yPos + imgHeight / 2;
+	svg.append("image")
+				.attr("id", id)
+				.attr("xlink:href", file)
+				.attr("x", xPos)
+				.attr("y", yPos)
+				.attr("width", imgWidth)
+				.attr("height", imgHeight)
+				.on("mouseover", function(d) {
+					var xCenter = xPos + imgWidth / 2;
+					var yCenter = yPos + imgHeight / 2; 
+					if (!isTiltedRight) {
+						isTiltedRight = true;
+						d3.select(this)
+							.transition()
+							.duration(1000)
+							.delay(200)
+							.attr("transform", "translate(0 0) rotate(15 " + xCenter + " " + yCenter + ")");
+					}
+					else {
+						isTiltedRight = false;
+						d3.select(this)
+							.transition()
+							.duration(1000)
+							.delay(200)
+							.attr("transform", "translate(0 0) rotate(-15 " + xCenter + " " + yCenter + ")");			
+					}
+				})
+				.on("mouseout", function(d) {			
+					d3.select(this)
+						.transition()
+						.duration(0)
+						.attr("transform", "translate(0 0) rotate(0 " + xCenter + " " + yCenter + ")");
+				});
 }
 
 function generateGraph1(dataset) {
