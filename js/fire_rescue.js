@@ -532,7 +532,7 @@ function start(){
 
         }
     })
-	d3.csv("csv/EMSdata2.csv", function(error, data) {
+	d3.csv("csv/Firedata3.csv", function(error, data) {
         if (error) {
             console.log(error);
         }
