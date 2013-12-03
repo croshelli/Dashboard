@@ -252,7 +252,7 @@ function generateGraph2(dataset) {
 				
 	//barchart for results of EMSdata1
 	var yScale = d3.scale.linear()
-				.domain([ 0, 100])
+				.domain([ 0, 200])
 				.range([ 200,0 ]);
 				
 	var xScale = d3.time.scale()
@@ -323,7 +323,7 @@ function generateGraph2(dataset) {
 				function firetruckText2(d){ var month= d["MonthName"];
 															var result= d["Result"];
 															var target= d["Result"] - d["Target"];
-															var retVal2=("In " + month + ", " + result+ "% of incidents met standards.");
+															var retVal2=("In " + month + ", there were " + result+ " fire events in Atlanta.");
 															var retVal2Line2=("");
 															if (target < 0){
 																retVal2Line2 = (retVal2Line2 + target + "% below Atlanta's target rate."); }
@@ -340,15 +340,7 @@ function generateGraph2(dataset) {
 															}
 				
 				
-							
-				//Line that shows target results
-				canvas2.data(dataset).append("line")
-						.attr("x1", chartX)
-						.attr("y1", function (d) {return  yScale(d["Target"])+padding+graphShift;})
-						.attr("x2",  chartWidth+(padding/2))
-						.attr("y2", function(d) {return yScale(d["Target"])+padding+graphShift;})
-						.attr("stroke", "black")
-						.attr("stroke-width", 1);
+			
 
 						
 									
@@ -373,7 +365,7 @@ function generateGraph2(dataset) {
 		.style("text-anchor", "middle")
 		.style("font-weight", "bold")
 		.attr("font-size","18px")
-		.text("% EMS Incidents Meeting Standards - BLS");
+		.text("Total Fire Events per Month");
 };
 
 /*Generate Circle Graphs*/
@@ -538,8 +530,8 @@ function start(){
         }
         else{
              
-            EMSdata2 = data;
-            generateGraph2(EMSdata2);
+            Firedata3 = data;
+            generateGraph2(Firedata3);
 
         }
     })
