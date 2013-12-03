@@ -39,7 +39,7 @@ function generateAnimations() {
 			d3.select(this).transition()
 							.attr("x", 20)
 							.duration(1000)
-							.delay(100);
+							.delay(50);
 		});	
 }
  
@@ -592,7 +592,7 @@ function start(){
             console.log(data);  
             EMSdata3 = data;
 			
-
+			generateAnimations();
 			generatePieCharts(EMSdata3);
 			
 	
@@ -607,7 +607,6 @@ function start(){
         else{
               
             EMSdata1 = data;
-            generateAnimations();
             generateGraph1(EMSdata1);
 
         }
