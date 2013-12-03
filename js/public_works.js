@@ -519,10 +519,16 @@ function generatePieCharts(data){
 					
 	var titleText = svg.append("text")
 		.attr("x", 0)
-		.attr("y", -10)
+		.attr("y", -30)
 		.style("font-weight", "bold")
 		.style("text-anchor", "middle")
 		.text(  "Amount of garbage collected" );
+	var titleText2 = svg.append("text")
+		.attr("x", 0)
+		.attr("y", -10)
+		.style("font-weight", "bold")
+		.style("text-anchor", "middle")
+		.text(  "" );
 	var timeText=svg.append("text")
 			.attr("x", 0)
 			.attr("y", 25)
@@ -580,7 +586,8 @@ function generatePieCharts(data){
 										retVal="red";
 										}
 									return retVal;})
-			titleText.transition().duration(100).text(function(d) { return "Amount of garbage collected in " + titles+":";})
+			titleText.transition().duration(100).text("Amount of garbage collected");
+			titleText2.transition().duration(100).text(function(d){ return ("in " + titles+":");});
 			timeText.transition().duration(100).text(function(d) {return (""+id+ " Tons");});
 			
 		  }
