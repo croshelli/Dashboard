@@ -118,14 +118,6 @@ footer {
 }
 
 
-p {
-    font-family: "Verdana", sans-serif;
-    font-size: 26px;
-    font-weight: bold;
-    left: 40%;
-    margin: 0;
-    position: absolute;
-}
 
 #graphs {
 	display: block;
