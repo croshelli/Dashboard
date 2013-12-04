@@ -547,11 +547,11 @@ function generatePieCharts(data){
 									if(d.value< 6000){
 										retVal= "black";}
 									else if(d.value<9000){
-										retVal="green";}
+										retVal="#89BD4A";}
 									else if(d.value<11000){
-										retVal="yellow";}
+										retVal="#F2E96B";}
 									else {
-										retVal="red";
+										retVal="#D95541";
 										}
 									return retVal;}) //set the color for each slice to be chosen from the color function defined above
 												 //this creates the actual SVG path using the associated data (pie) with the arc drawing function
@@ -579,11 +579,11 @@ function generatePieCharts(data){
 									if(d.value< 6000){
 										retVal= "black";}
 									else if(d.value<9000){
-										retVal="green";}
+										retVal="#89BD4A";}
 									else if(d.value<11000){
-										retVal="yellow";}
+										retVal="#F2E96B";}
 									else {
-										retVal="red";
+										retVal="#D95541";
 										}
 									return retVal;})
 			titleText.transition().duration(100).text("Amount of garbage collected");
